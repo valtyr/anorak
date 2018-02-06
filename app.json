@@ -19,6 +19,7 @@
     },
     "ios": {
       "bundleIdentifier": "is.anorak.anorak",
+      "buildNumber": "2",
       "supportsTablet": false,
       "loadJSInBackgroundExperimental": true
     }
