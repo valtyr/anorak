@@ -18,6 +18,7 @@
       "nonPersistent": "--nonPersistent"
     },
     "ios": {
+      "bundleIdentifier": "is.anorak.anorak",
       "supportsTablet": false,
       "loadJSInBackgroundExperimental": true
     }

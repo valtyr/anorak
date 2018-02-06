@@ -6,7 +6,8 @@
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "publish": "exp publish"
   },
   "dependencies": {
     "apollo-client-preset": "^1.0.6",
@@ -14,6 +15,7 @@
     "eslint": "^4.9.0",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
+    "exp": "^49.2.2",
     "expo": "^25.0.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
