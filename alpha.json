@@ -1,0 +1,24 @@
+{
+  "name": "anorak",
+  "description": "The app for anorak.",
+  "slug": "anorak-client",
+  "privacy": "unlisted",
+  "sdkVersion": "25.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "icon": "./assets/alpha-icon.png",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "packagerOpts": {
+    "assetExts": ["ttf", "mp4"],
+    "nonPersistent": "--nonPersistent"
+  },
+  "ios": {
+    "bundleIdentifier": "is.anorak.alpha",
+    "supportsTablet": false,
+    "loadJSInBackgroundExperimental": true
+  }
+}
