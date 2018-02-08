@@ -48,7 +48,6 @@ class Period extends Component {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    padding: 15,
     borderRadius: 8,
     backgroundColor: 'white',
     shadowColor: 'black',
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
   period: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    padding: 15,
   },
   periodTitle: {
     fontWeight: '500',
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
   expanded: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingTop: 30,
+    padding: 15,
+    borderTopColor: 'rgb(235, 235, 235)',
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
   detail: {
     alignItems: 'center',
