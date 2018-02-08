@@ -25,6 +25,7 @@ const Navigation = StackNavigator(
           swipeEnabled: true,
           animationEnabled: true,
           tabBarComponent: AnimatedTabBar,
+          // lazyLoad: true,
         },
       ),
     },

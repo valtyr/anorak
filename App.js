@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {SecureStore} from 'expo';
+import {SecureStore, AppLoading} from 'expo';
 
 import GraphQLProvider from './src/Apollo';
 import {TOKEN_KEY} from './src/Consts/vars';
@@ -12,6 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      splashScreen: true,
       token: null,
     };
   }
@@ -22,11 +23,13 @@ class App extends Component {
 
   initializeApp = async () => {
     const token = await SecureStore.getItemAsync(TOKEN_KEY);
-    if (token) this.setState({token});
+    if (token) this.setState({token, loggedIn: true});
+    this.setState({splashScreen: false});
   };
 
   render() {
     const authenticated = this.state.token ? true : false;
+    if (this.state.splashScreen) return <AppLoading />;
     return (
       <GraphQLProvider token={this.state.token}>
         {authenticated ? (

@@ -8,7 +8,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const generateClient = token => {
   if (token) {
-    const httpLink = new HttpLink({uri: 'https://api.anorak.is/graphql'});
+    const httpLink = new HttpLink({uri: 'https://dev.valtyr.is/graphql'});
     const authMiddleware = new ApolloLink((operation, forward) => {
       // add the authorization to the headers
       console.log(token);
@@ -28,7 +28,7 @@ const generateClient = token => {
     });
   }
 
-  const httpLink = new HttpLink({uri: 'https://api.anorak.is/auth'});
+  const httpLink = new HttpLink({uri: 'https://dev.valtyr.is/auth'});
   return new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),

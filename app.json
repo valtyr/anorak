@@ -14,8 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4"],
-      "nonPersistent": "--nonPersistent"
+      "assetExts": ["ttf", "mp4"]
     },
     "ios": {
       "bundleIdentifier": "is.anorak.anorak",
