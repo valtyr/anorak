@@ -12,7 +12,7 @@ const NameAndGroup = ({name, group}) => (
 );
 
 const styles = StyleSheet.create({
-  root: {marginBottom: 20},
+  root: {marginBottom: 20, marginTop: 10},
   name: {
     textAlign: 'center',
     fontWeight: '700',

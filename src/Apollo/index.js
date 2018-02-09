@@ -6,9 +6,12 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloLink, concat} from 'apollo-link';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
+const uribase = __DEV__ ? 'https://dev.valtyr.is' : 'https://api.anorak.is';
+const uri = endpoint => `${uribase}/${endpoint}`;
+
 const generateClient = token => {
   if (token) {
-    const httpLink = new HttpLink({uri: 'https://dev.valtyr.is/graphql'});
+    const httpLink = new HttpLink({uri: uri('graphql')});
     const authMiddleware = new ApolloLink((operation, forward) => {
       // add the authorization to the headers
       console.log(token);
@@ -28,7 +31,7 @@ const generateClient = token => {
     });
   }
 
-  const httpLink = new HttpLink({uri: 'https://dev.valtyr.is/auth'});
+  const httpLink = new HttpLink({uri: uri('auth')});
   return new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),

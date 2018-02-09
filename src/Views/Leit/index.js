@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Platform, Text, SafeAreaView} from 'react-native';
 import debounce from 'lodash.debounce';
 
-import {Hero, ResultList, SearchBar} from './components';
+import {ResultList, SearchBar} from './components';
+import {Hero, TitleBar} from '../../Components';
+import {mainReversed} from '../../Consts/gradients';
 
 class Leit extends Component {
   constructor() {
@@ -26,11 +28,41 @@ class Leit extends Component {
     const {navigation} = this.props;
     return (
       <View style={{flex: 1}}>
+        <SafeAreaView>
+          <View style={styles.navbarDummy}>
+            <Text style={styles.title}>Leit</Text>
+          </View>
+        </SafeAreaView>
+        <Hero noVericalFill reverse gradient={mainReversed} />
+        <View style={{paddingRight: 20, paddingLeft: 20}}>
+          <TitleBar title="Leit" white />
+        </View>
         <SearchBar search={searchBarValue} onChangeText={this.updateSearch} />
-        {query !== '' && <ResultList search={query} onTap={id => navigation.navigate('Profile', {id})} />}
+        <ResultList search={query !== '' && query} onTap={id => navigation.navigate('Profile', {id})} />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  navbarDummy: {
+    zIndex: 10,
+    ...Platform.select({
+      android: {
+        paddingTop: 25,
+      },
+    }),
+  },
+  title: {
+    marginTop: 10,
+    marginBottom: 10,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '600',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    opacity: 0,
+  },
+});
 
 export default Leit;
