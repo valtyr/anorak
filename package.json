@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "publish": "exp publish",
     "bi-alpha": "exp bi --release-channel alpha --no-publish --config alpha.json",
-    "bi": "exp bi --no-publish"
+    "bi": "exp bi --no-publish",
+    "alpha-json": "node ./scripts/writeAlphaAppJSON.js",
+    "prod-json": "node ./scripts/writeProdAppJSON.js"
   },
   "dependencies": {
     "apollo-client-preset": "^1.0.6",
@@ -22,6 +24,7 @@
     "expo": "^25.0.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "json-beautify": "^1.0.1",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.19.2",

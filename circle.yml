@@ -2,12 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:8.1.4
+      - image: node:8.9.4
 
     steps:
       - checkout
 
       - run: yarn install
+      - run: yarn prod-json
       # - run: yarn run lint
       # - run: yarn run test --maxWorkers=1
       # - run: yarn run flow
@@ -18,5 +19,9 @@ jobs:
             ./node_modules/.bin/exp login -u $EXPO_USER -p $EXPO_PASSWORD
 
             if [ "$CIRCLE_BRANCH" == "master" ]; then
-              ./node_modules/.bin/exp publish --release-channel alpha --config alpha.json --non-interactive
+              yarn prod-json
+              ./node_modules/.bin/exp publish --release-channel alpha --non-interactive
+            elif [ "$CIRCLE_BRANCH" == "alphapub" ]; then
+              yarn alpha-json
+              ./node_modules/.bin/exp publish --release-channel alpha --non-interactive
             fi
