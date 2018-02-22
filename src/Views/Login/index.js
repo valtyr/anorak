@@ -9,19 +9,23 @@ import Code from './components/Code';
 import Success from './components/Success';
 import Header from './components/Header';
 
-const Login = StackNavigator(
-  {
-    LoginWelcome: {screen: Welcome},
-    LoginKennitala: {screen: Kennitala},
-    LoginCode: {screen: withMappedNavigationProps(Code)},
-    LoginSuccess: {screen: withMappedNavigationProps(Success)},
-  },
-  {
-    headerMode: 'none',
-    cardStyle: {
-      shadowOpacity: 0,
+const WrappedLogin = props => {
+  const Login = StackNavigator(
+    {
+      LoginWelcome: {screen: Welcome},
+      LoginKennitala: {screen: Kennitala},
+      LoginCode: {screen: withMappedNavigationProps(Code)},
+      LoginSuccess: {screen: withMappedNavigationProps(p => <Success {...p} initializeApp={props.initializeApp} />)},
     },
-  },
-);
+    {
+      headerMode: 'none',
+      cardStyle: {
+        shadowOpacity: 0,
+      },
+    },
+  );
 
-export default Login;
+  return <Login {...props} />;
+};
+
+export default WrappedLogin;

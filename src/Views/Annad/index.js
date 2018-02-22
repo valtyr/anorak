@@ -4,6 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Screen, ProfilePicture, Hero} from '../../Components';
 import {NameAndGroup, Item} from './components';
 import {mainReversed} from '../../Consts/gradients';
+import {logOut} from '../../Helpers/session';
 
 import {Entypo, MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 
@@ -35,6 +36,8 @@ const Annad = ({data, navigation}) => (
         onPress={() => navigation.navigate('Skirteini')}
       />
       <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Afslættir" />
+
+      <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Skrá út" onPress={logOut} />
     </View>
   </Screen>
 );

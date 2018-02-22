@@ -23,20 +23,23 @@ class App extends Component {
 
   initializeApp = async () => {
     const token = await SecureStore.getItemAsync(TOKEN_KEY);
-    if (token) this.setState({token, loggedIn: true});
+    if (token) this.setState({token: token || null, loggedIn: true});
     this.setState({splashScreen: false});
   };
 
   render() {
     const authenticated = this.state.token ? true : false;
     if (this.state.splashScreen) return <AppLoading />;
+    if (authenticated) {
+      return (
+        <GraphQLProvider token={this.state.token}>
+          <LoggedIn initializeApp={this.initializeApp} />
+        </GraphQLProvider>
+      );
+    }
     return (
-      <GraphQLProvider token={this.state.token}>
-        {authenticated ? (
-          <LoggedIn screenProps={{initializeApp: this.initializeApp}} />
-        ) : (
-          <Login screenProps={{initializeApp: this.initializeApp}} />
-        )}
+      <GraphQLProvider>
+        <Login initializeApp={this.initializeApp} />
       </GraphQLProvider>
     );
   }

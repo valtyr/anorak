@@ -51,7 +51,8 @@ class LoggedIn extends Component {
   };
 
   render() {
-    return <Navigation />;
+    const {initializeApp} = this.props;
+    return <Navigation screenProps={{initializeApp}} />;
   }
 }
 
