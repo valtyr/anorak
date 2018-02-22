@@ -7,13 +7,14 @@ import {Period} from './components';
 import {Screen, TitleBar, Hero} from '../../Components';
 
 const getNextPeriodIndex = periods => {
-  const now = new Date();
+  const now = new Date('1518434400');
   for (const index in periods) {
     const period = periods[index];
     const periodEndSplit = period.endTime.split(':');
     const periodEndHour = Number(periodEndSplit[0]);
     const periodEndMinutes = Number(periodEndSplit[1]);
-    if (period.weekday >= now.getDay() && periodEndHour >= now.getHours() && periodEndMinutes >= now.getMinutes()) {
+    console.log(now.getDay());
+    if (period.weekday >= now.getDay() - 1 && periodEndHour >= now.getHours() && periodEndMinutes >= now.getMinutes()) {
       return index;
     }
   }
@@ -33,9 +34,7 @@ const Stundaskra = ({data}) => {
   return (
     <Screen style={styles.root} title="Stundaskrá">
       <Hero />
-      <View style={styles.header}>
-        <TitleBar title="Stundaskrá" white />
-      </View>
+      <TitleBar title="Stundaskrá" white />
       <View style={styles.timetable}>
         {periods &&
           periods.map((period, index) => (
@@ -58,10 +57,7 @@ const styles = StyleSheet.create({
   },
   timetable: {
     padding: 20,
-  },
-  header: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    backgroundColor: 'transparent',
   },
 });
 

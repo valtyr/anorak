@@ -41,7 +41,7 @@ class Period extends Component {
         <View>
           {lastPeriod &&
             lastPeriod.weekday !== period.weekday && (
-              <Text style={styles.separator}>{weekdays[period.weekday - 1].toUpperCase()}</Text>
+              <Text style={styles.separator}>{weekdays[period.weekday].toUpperCase()}</Text>
             )}
           <View style={styles.root}>
             <View style={styles.period}>

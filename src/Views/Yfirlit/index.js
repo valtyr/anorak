@@ -6,12 +6,14 @@ import gql from 'graphql-tag';
 
 import {edgeToNode} from '../../Helpers/graphql';
 
-import {Screen} from '../../Components';
-import {Hero, Birthdays, Events, NavBar} from './components';
+import {Screen, Hero, TitleBar} from '../../Components';
+import {Birthdays, Events, HeroImage} from './components';
 
 const Yfirlit = ({data, navigation}) => (
   <Screen title="Yfirlit">
     <Hero />
+    <TitleBar title="Yfirlit" white />
+    <HeroImage />
     <Events />
     <Birthdays birthdays={edgeToNode(data.birthdays)} onPress={id => navigation.navigate('Profile', {id})} />
   </Screen>

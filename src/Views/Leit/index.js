@@ -34,9 +34,7 @@ class Leit extends Component {
           </View>
         </SafeAreaView>
         <Hero noVericalFill reverse gradient={mainReversed} />
-        <View style={{paddingRight: 20, paddingLeft: 20}}>
-          <TitleBar title="Leit" white />
-        </View>
+        <TitleBar title="Leit" white />
         <SearchBar search={searchBarValue} onChangeText={this.updateSearch} />
         <ResultList search={query !== '' && query} onTap={id => navigation.navigate('Profile', {id})} />
       </View>

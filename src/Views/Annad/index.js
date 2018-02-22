@@ -12,7 +12,7 @@ import {graphql} from 'react-apollo';
 
 const iconProps = {color: 'rgb(223, 223, 223)', size: 20};
 
-const Annad = ({data}) => (
+const Annad = ({data, navigation}) => (
   <Screen style={styles.root} gradient={mainReversed} title="Annað">
     <Hero reverse gradient={mainReversed} />
     <View style={styles.profile}>
@@ -29,7 +29,11 @@ const Annad = ({data}) => (
 
     <View style={styles.items}>
       <Item icon={<MaterialCommunityIcons {...iconProps} name="account-edit" />} title="Mínar upplýsingar" />
-      <Item icon={<Entypo {...iconProps} name="credit-card" />} title="Skírteinið mitt" />
+      <Item
+        icon={<Entypo {...iconProps} name="credit-card" />}
+        title="Skírteinið mitt"
+        onPress={() => navigation.navigate('Skirteini')}
+      />
       <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Afslættir" />
     </View>
   </Screen>

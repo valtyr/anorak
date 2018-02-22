@@ -9,7 +9,10 @@ const TitleBar = ({title, children, white}) => (
 );
 
 const styles = StyleSheet.create({
-  root: {},
+  root: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   title: {
     fontSize: 36,
     fontWeight: '600',
