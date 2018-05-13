@@ -64,7 +64,7 @@ class Profile extends Component {
                 title="Instagram"
                 content={`@${user.instagramUsername}`}
                 icon="instagram"
-                onPress={() => Linking.openURL(`https://instagram.com/elinhalla/${user.instagramUsername}`)}
+                onPress={() => Linking.openURL(`https://instagram.com/${user.instagramUsername}`)}
               />
             )}
             <ProfileItem title="Afmæli" content={formattedBirthday()} icon="birthday" />
