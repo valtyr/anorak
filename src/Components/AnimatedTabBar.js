@@ -60,14 +60,20 @@ class CampaignsTabBar extends React.Component {
 
     if (layout && layout.length !== inputRange.length) return {};
 
-    const width = position.interpolate({
-      inputRange,
-      outputRange: inputRange.map(inputIndex => layout[inputIndex] && layout[inputIndex].width),
-    });
-    const marginLeft = position.interpolate({
-      inputRange,
-      outputRange: inputRange.map(inputIndex => layout[inputIndex] && layout[inputIndex].x),
-    });
+    const width = position.interpolate(
+      {
+        inputRange,
+        outputRange: inputRange.map(inputIndex => layout[inputIndex] && layout[inputIndex].width),
+      },
+      {useNativeDriver: true},
+    );
+    const marginLeft = position.interpolate(
+      {
+        inputRange,
+        outputRange: inputRange.map(inputIndex => layout[inputIndex] && layout[inputIndex].x),
+      },
+      {useNativeDriver: true},
+    );
 
     return {
       marginLeft,
@@ -87,7 +93,7 @@ class CampaignsTabBar extends React.Component {
             {navigationState.routes.map((route, idx) => {
               // const activeTab = navigationState.index === idx;
               const outputRange = inputRange.map(inputIndex => (inputIndex === idx ? 1 : 0.3));
-              const opacity = position.interpolate({inputRange, outputRange});
+              const opacity = position.interpolate({inputRange, outputRange}, {useNativeDriver: true});
 
               return (
                 <TouchableOpacity
