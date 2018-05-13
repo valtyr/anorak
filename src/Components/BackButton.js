@@ -3,12 +3,12 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import BackChevron from './BackChevron';
 
-const BackButton = ({onPress}) => (
+const BackButton = ({onPress, labelVisible = true, dark = false}) => (
   <TouchableOpacity style={style.root} onPress={onPress}>
     <View style={style.chevron}>
-      <BackChevron />
+      <BackChevron dark={dark} />
     </View>
-    <Text style={style.label}>Til baka</Text>
+    {labelVisible && <Text style={[style.label, dark && style.dark]}>Til baka</Text>}
   </TouchableOpacity>
 );
 
@@ -25,6 +25,9 @@ const style = StyleSheet.create({
     color: 'white',
     fontSize: 17,
     paddingBottom: 4,
+  },
+  dark: {
+    color: 'black',
   },
 });
 

@@ -13,7 +13,6 @@ const getNextPeriodIndex = periods => {
     const periodEndSplit = period.endTime.split(':');
     const periodEndHour = Number(periodEndSplit[0]);
     const periodEndMinutes = Number(periodEndSplit[1]);
-    console.log(now.getDay());
     if (period.weekday >= now.getDay() - 1 && periodEndHour >= now.getHours() && periodEndMinutes >= now.getMinutes()) {
       return index;
     }
@@ -29,7 +28,7 @@ const sortedPeriods = periods => {
 };
 
 const Stundaskra = ({data}) => {
-  const periods = data.currentUser && sortedPeriods(data.currentUser.timetable.periods);
+  const periods = data.currentUser && data.currentUser.timetable && sortedPeriods(data.currentUser.timetable.periods);
 
   return (
     <Screen style={styles.root} title="Stundaskrá">

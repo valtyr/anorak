@@ -21,6 +21,7 @@ class Screen extends Component {
           onScroll={Animated.event([{nativeEvent: {contentOffset: {y: this.state.scrollY}}}])}
           scrollEventThrottle={16}
           style={styles.scrollView}
+          overScrollMode="always"
         >
           {children}
         </Animated.ScrollView>
@@ -28,28 +29,24 @@ class Screen extends Component {
           style={{
             shadowColor: 'rgba(0, 0, 0, 0.16)',
             shadowOffset: {width: 0, height: 2},
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
             shadowRadius: 10,
-            shadowOpacity: this.state.scrollY.interpolate({
-              inputRange: [0, 30],
-              outputRange: [0, 1],
-            }),
+            shadowOpacity: 1,
+            opacity: this.state.scrollY.interpolate(
+              {
+                inputRange: [0, 30],
+                outputRange: [0, 1],
+              },
+              {useNativeDriver: true},
+            ),
           }}
         >
           <LinearGradient style={styles.navbar} {...gradient}>
             <SafeAreaView>
-              <Animated.Text
-                style={[
-                  styles.title,
-                  {
-                    opacity: this.state.scrollY.interpolate({
-                      inputRange: [0, 30],
-                      outputRange: [0, 1],
-                    }),
-                  },
-                ]}
-              >
-                {title}
-              </Animated.Text>
+              <Text style={styles.title}>{title}</Text>
             </SafeAreaView>
           </LinearGradient>
         </Animated.View>

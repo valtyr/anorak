@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
-import {KeyboardAvoidingView, TextInput, Text, View, StyleSheet, SafeAreaView, Keyboard} from 'react-native';
-import {Button, TitleBar} from '../../../Components';
+import {KeyboardAvoidingView, TextInput, Text, View, StyleSheet, SafeAreaView, Keyboard, StatusBar} from 'react-native';
+import {Button, TitleBar, Particles, BackButton} from '../../../Components';
 
 import gql from 'graphql-tag';
 import {graphql} from 'react-apollo';
 
-import Header from './Header';
+import NavBar from './NavBar';
 
 class Kennitala extends Component {
-  static navigationOptions = () => ({
-    header: () => <Header title="Innskráning" />,
-  });
-
   constructor(props) {
     super(props);
     this.state = {
@@ -53,39 +49,45 @@ class Kennitala extends Component {
 
   render() {
     const {kt, errors, loading} = this.state;
+    const {navigation} = this.props;
     return (
-      <SafeAreaView style={styles.root}>
-        <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-          <View style={styles.content}>
-            <TitleBar title="Innskráning" />
-            <Text style={styles.explanation}>Byrjaðu á að stimpla inn kennitöluna þína</Text>
-            <View style={styles.center}>
-              <TextInput
-                autoFocus
-                style={styles.input}
-                keyboardType="numeric"
-                maxLength={10}
-                value={kt}
-                onChangeText={this.onKt}
-                underlineColorAndroid="transparent"
-                placeholder="Kennitala"
+      <Particles>
+        <SafeAreaView style={styles.root}>
+          <StatusBar barStyle="dark-content" />
+          <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+            <View style={styles.content}>
+              <NavBar title="Skráðu þig inn" onBack={() => navigation.goBack()} />
+              <View style={styles.center}>
+                <TextInput
+                  autoFocus
+                  style={styles.input}
+                  keyboardType="numeric"
+                  maxLength={10}
+                  value={kt}
+                  onChangeText={this.onKt}
+                  underlineColorAndroid="transparent"
+                  placeholder="Kennitala"
+                />
+                {errors ? (
+                  errors.map((error, i) => (
+                    <Text key={i} style={styles.error}>
+                      {error}
+                    </Text>
+                  ))
+                ) : (
+                  <Text style={styles.explanation}>Þegar þú ýtir á áfram færðu sent SMS með innskráningarkóða.</Text>
+                )}
+              </View>
+              <Button
+                onPress={this.sendSms}
+                isActive={this.ktIsValid(kt) && !loading}
+                title={!loading ? 'Áfram' : 'Hleður...'}
+                loading={loading}
               />
-              {errors &&
-                errors.map((error, i) => (
-                  <Text key={i} style={styles.error}>
-                    {error}
-                  </Text>
-                ))}
             </View>
-            <Button
-              onPress={this.sendSms}
-              isActive={this.ktIsValid(kt) && !loading}
-              title={!loading ? 'Áfram' : 'Hleður...'}
-              loading={loading}
-            />
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
+      </Particles>
     );
   }
 }
@@ -93,30 +95,35 @@ class Kennitala extends Component {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'white',
   },
   content: {
     flexGrow: 1,
-    padding: 30,
+    padding: 15,
   },
   explanation: {
-    fontSize: 18,
     color: 'rgb(191, 191, 191)',
     marginTop: 10,
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 14,
   },
   center: {
     flex: 1,
     justifyContent: 'center',
   },
   input: {
-    fontSize: 50,
-    borderBottomWidth: 4,
-    borderBottomColor: 'rgb(228, 228, 228)',
+    fontSize: 20,
+    backgroundColor: 'white',
+    borderRadius: 200,
+    textAlign: 'center',
+    padding: 15,
   },
   error: {
     color: 'rgb(246, 121, 94)',
     marginTop: 10,
     fontWeight: '600',
+    textAlign: 'center',
+    padding: 15,
   },
 });
 

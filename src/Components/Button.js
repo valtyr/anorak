@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   root: {
     padding: 20,
     backgroundColor: 'transparent',
-    borderRadius: 24,
+    borderRadius: 1000,
     flexDirection: 'row',
     justifyContent: 'center',
   },

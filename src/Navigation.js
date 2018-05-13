@@ -22,10 +22,10 @@ const Navigation = StackNavigator(
         },
         {
           tabBarPosition: 'bottom',
-          swipeEnabled: true,
+          // swipeEnabled: true,
           animationEnabled: true,
           tabBarComponent: AnimatedTabBar,
-          // lazyLoad: true,
+          lazy: false,
         },
       ),
     },
