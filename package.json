@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "publish": "exp publish",
     "bi-alpha": "exp bi --release-channel alpha --no-publish --config alpha.json",
-    "bi": "exp bi --no-publish"
+    "bi": "exp bi --no-publish",
+    "poll-build-ios": "node scripts/poll-build/index.js --ios",
+    "poll-build-android": "node scripts/poll-build/index.js --android"
   },
   "dependencies": {
     "apollo-client-preset": "^1.0.6",
@@ -21,6 +23,7 @@
     "exp": "^53.1.0",
     "expo": "^25.0.0",
     "graphql": "^0.12.3",
+    "graphql-request": "^1.6.0",
     "graphql-tag": "^2.6.1",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
@@ -34,6 +37,7 @@
     "react-navigation-props-mapper": "^0.1.2",
     "recompose": "^0.26.0",
     "shallow-equals": "^1.0.0",
-    "shallowequal": "^1.0.2"
+    "shallowequal": "^1.0.2",
+    "sync-request": "^6.0.0"
   }
 }
