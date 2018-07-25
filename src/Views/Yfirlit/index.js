@@ -14,7 +14,7 @@ const Yfirlit = ({data, navigation}) => (
     <Hero />
     <TitleBar title="Yfirlit" white />
     <HeroImage />
-    <Events />
+    <Events onPress={() => navigation.navigate('Event')} />
     <Birthdays birthdays={edgeToNode(data.birthdays)} onPress={id => navigation.navigate('Profile', {id})} />
   </Screen>
 );

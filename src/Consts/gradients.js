@@ -22,6 +22,12 @@ export const lightBlue = {
   end: [1, 0],
 };
 
+export const light = {
+  colors: ['#f5f5f5', '#f5f5f5'],
+  start: [0, 0],
+  end: [1, 0],
+};
+
 export const imageVignette = {
   colors: ['transparent', 'black'],
 };

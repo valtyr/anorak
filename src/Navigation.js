@@ -6,7 +6,7 @@ import {View} from 'react-native';
 
 import {TabNavigator, StackNavigator} from 'react-navigation';
 
-import {Yfirlit, Welcome, Profile, Leit, Annad, Stundaskra, Skirteini} from './Views';
+import {Yfirlit, Welcome, Profile, Leit, Annad, Stundaskra, Skirteini, Event} from './Views';
 import {AnimatedTabBar, Button} from './Components';
 import {TOKEN_KEY} from './Consts/vars';
 
@@ -34,6 +34,9 @@ const Navigation = StackNavigator(
     },
     Skirteini: {
       screen: Skirteini,
+    },
+    Event: {
+      screen: Event,
     },
   },
   {

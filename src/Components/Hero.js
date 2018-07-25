@@ -6,14 +6,13 @@ import Cutout from './Cutout';
 import Particles from './Particles';
 import {main} from '../Consts/gradients';
 
-const Hero = ({title, reverse, gradient, noVerticalFill = false}) => {
+const Hero = ({reverse, gradient, noVerticalFill = false}) => {
   var {width} = Dimensions.get('window');
 
   const grad = gradient || main;
 
   return (
     <View style={[styles.hero]}>
-      <StatusBar barStyle="light-content" />
       <LinearGradient {...grad} style={[styles.gradient, noVerticalFill && styles.noVerticalFill]}>
         <Particles spawnInterval={300}>
           <Cutout width={width} reverse={reverse} />

@@ -9,7 +9,7 @@ import {onError} from 'apollo-link-error';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const uribase = __DEV__ ? 'https://v.anorak.is' : 'https://api.anorak.is';
-// const uribase =  'https://api.anorak.is';
+// const uribase = 'https://api.anorak.is';
 const uri = endpoint => `${uribase}/${endpoint}`;
 
 const generateClient = token => {

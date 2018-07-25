@@ -7,7 +7,7 @@ import formatBirthday from '../../Helpers/formatBirthday';
 import formatPhoneNumber from '../../Helpers/formatPhoneNumber';
 import {edgeToNode} from '../../Helpers/graphql';
 
-import {ProfilePicture, Grid, Screen} from '../../Components';
+import {ProfilePicture, Grid, Screen, TitleBar} from '../../Components';
 import {blue} from '../../Consts/gradients';
 import {Hero, ProfileItem, NameAndGroup, Bitmoji, CurrentPeriod} from './components';
 

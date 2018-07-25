@@ -31,7 +31,7 @@ const style = StyleSheet.create({
   },
   hero: {
     backgroundColor: 'transparent',
-    marginTop: -1000,
+    marginTop: -920,
   },
 
   cutout: {

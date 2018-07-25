@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Animated, SafeAreaView, Platform} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Animated, SafeAreaView, Platform, StatusBar} from 'react-native';
 import {LinearGradient} from 'expo';
 
 import {main} from '../Consts/gradients';
@@ -13,10 +13,11 @@ class Screen extends Component {
   }
 
   render() {
-    const {title, gradient = main, children} = this.props;
+    const {title, gradient = main, children, light} = this.props;
 
     return (
       <View style={styles.root}>
+        {light ? <StatusBar barStyle="dark-content" animated /> : <StatusBar barStyle="light-content" animated />}
         <Animated.ScrollView
           onScroll={Animated.event([{nativeEvent: {contentOffset: {y: this.state.scrollY}}}])}
           scrollEventThrottle={16}
@@ -46,7 +47,7 @@ class Screen extends Component {
         >
           <LinearGradient style={styles.navbar} {...gradient}>
             <SafeAreaView>
-              <Text style={styles.title}>{title}</Text>
+              <Text style={light ? styles.lightTitle : styles.title}>{title}</Text>
             </SafeAreaView>
           </LinearGradient>
         </Animated.View>
@@ -78,7 +79,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: '600',
-    fontStyle: 'italic',
+    // fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  lightTitle: {
+    marginTop: 10,
+    marginBottom: 10,
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '600',
+    // fontStyle: 'italic',
     textAlign: 'center',
   },
 });
