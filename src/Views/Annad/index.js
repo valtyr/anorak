@@ -29,15 +29,18 @@ const Annad = ({data, navigation}) => (
     </View>
 
     <View style={styles.items}>
-      <Item icon={<MaterialCommunityIcons {...iconProps} name="account-edit" />} title="Mínar upplýsingar" />
       <Item
+        icon={<MaterialCommunityIcons {...iconProps} name="account-edit" />}
+        title="Mínar upplýsingar"
+        onPress={() => navigation.navigate('Profile', {id: data.currentUser && data.currentUser.id})}
+      />
+      {/* <Item
         icon={<Entypo {...iconProps} name="credit-card" />}
         title="Skírteinið mitt"
         onPress={() => navigation.navigate('Skirteini')}
-      />
+      /> */}
       <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Afslættir" />
-
-      <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Skrá út" onPress={logOut} />
+      <Item icon={<MaterialCommunityIcons {...iconProps} name="exit-to-app" />} title="Skrá út" onPress={logOut} />
     </View>
   </Screen>
 );

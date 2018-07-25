@@ -10,7 +10,7 @@ import plurotron from '../../../Helpers/plurotron';
 const Result = ({user, onTap}) => {
   return (
     <TouchableOpacity style={style.result} onPress={() => onTap(user.id)}>
-      <ProfilePicture width={50} />
+      <ProfilePicture width={50} hash={user.imageHash} />
       <View style={style.info}>
         <Text style={style.name}>{user.name}</Text>
         <Text style={style.group}>{user.group}</Text>
