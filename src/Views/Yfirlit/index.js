@@ -7,29 +7,68 @@ import gql from 'graphql-tag';
 import {edgeToNode} from '../../Helpers/graphql';
 
 import {Screen, Hero, TitleBar} from '../../Components';
-import {Birthdays, Events, HeroImage} from './components';
+import {Birthdays, Events, HeroImage, Posts} from './components';
 
 const Yfirlit = ({data, navigation}) => (
-  <Screen title="Yfirlit">
+  <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
     <Hero />
     <TitleBar title="Yfirlit" white />
-    <HeroImage />
+    <HeroImage
+      nextPeriod={
+        data.currentUser &&
+        data.currentUser.timetable &&
+        data.currentUser.timetable.nextPeriod
+      }
+      onPeriodPress={() => navigation.navigate('Stundaskrá')}
+    />
     <Events onPress={() => navigation.navigate('Event')} />
-    <Birthdays birthdays={edgeToNode(data.birthdays)} onPress={id => navigation.navigate('Profile', {id})} />
+    <Birthdays
+      birthdays={edgeToNode(data.birthdays)}
+      onPress={id => navigation.navigate('Profile', {id})}
+    />
+    <Posts
+      posts={edgeToNode(data.posts)}
+      onPress={id => navigation.navigate('Post', {id})}
+    />
   </Screen>
 );
 
-const style = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-});
-
 const YfirlitQuery = gql`
   query YfirlitQuery {
+    posts(first: 4) {
+      edges {
+        node {
+          id
+          name
+          photoUrl
+          body
+          addedOn
+          published
+          school {
+            id
+            code
+            organizationName
+          }
+        }
+      }
+    }
+    events(first: 4) {
+      edges {
+        node {
+          id
+          name
+          description
+          addedOn
+          photoUrl
+        }
+      }
+    }
     currentUser {
+      id
       timetable {
+        id
         nextPeriod {
+          id
           title
           startTime
           weekday

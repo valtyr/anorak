@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Platform, Text, SafeAreaView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native';
 import debounce from 'lodash.debounce';
 
 import {ResultList, SearchBar} from './components';
@@ -11,7 +19,7 @@ class Leit extends Component {
     super();
     this.state = {
       searchBarValue: '',
-      query: '',
+      query: ''
     };
   }
 
@@ -27,17 +35,22 @@ class Leit extends Component {
     const {searchBarValue, query} = this.state;
     const {navigation} = this.props;
     return (
-      <View style={{flex: 1}}>
-        <SafeAreaView>
-          <View style={styles.navbarDummy}>
-            <Text style={styles.title}>Leit</Text>
-          </View>
-        </SafeAreaView>
-        <Hero noVerticalFill reverse gradient={mainReversed} />
-        <TitleBar title="Leit" white />
-        <SearchBar search={searchBarValue} onChangeText={this.updateSearch} />
-        <ResultList search={query !== '' && query} onTap={id => navigation.navigate('Profile', {id})} />
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{flex: 1}}>
+          <SafeAreaView>
+            <View style={styles.navbarDummy}>
+              <Text style={styles.title}>Leit</Text>
+            </View>
+          </SafeAreaView>
+          <Hero noVerticalFill reverse gradient={mainReversed} />
+          <TitleBar title="Leit" white />
+          <SearchBar search={searchBarValue} onChangeText={this.updateSearch} />
+          <ResultList
+            search={query !== '' && query}
+            onTap={id => navigation.navigate('Profile', {id})}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -47,9 +60,9 @@ const styles = StyleSheet.create({
     zIndex: 10,
     ...Platform.select({
       android: {
-        paddingTop: 25,
-      },
-    }),
+        paddingTop: 25
+      }
+    })
   },
   title: {
     marginTop: 10,
@@ -59,8 +72,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontStyle: 'italic',
     textAlign: 'center',
-    opacity: 0,
-  },
+    opacity: 0
+  }
 });
 
 export default Leit;

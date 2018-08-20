@@ -24,7 +24,7 @@ const uploadBinaryIos = path =>
     const secrets = getSecrets();
     if (!secrets.ITUNES_CONNECT_ACCOUNT || !secrets.ITUNES_CONNECT_PASSWORD) {
       logError(
-        'Make sure you have keys ITUNES_CONNECT_ACCOUNT and ITUNES_CONNECT_PASSWORD in your .secrets.json',
+        'Make sure you have keys ITUNES_CONNECT_ACCOUNT and ITUNES_CONNECT_PASSWORD in your .secrets.json'
       );
     }
     const command = `${altoolPath} --upload-app -f ${path} -u ${
@@ -38,9 +38,13 @@ const uploadBinaryIos = path =>
     });
 
     uploadProcess.on('close', () => {
-      if (output.includes('package(s) were not uploaded because they had problems')) {
+      if (
+        output.includes(
+          'package(s) were not uploaded because they had problems'
+        )
+      ) {
         notify(
-          'Problems were encountered when uploading to iTunes Connect. See terminal for details.',
+          'Problems were encountered when uploading to iTunes Connect. See terminal for details.'
         );
         spinner.fail();
       } else {
@@ -48,11 +52,15 @@ const uploadBinaryIos = path =>
         spinner.succeed();
       }
 
+      const split = output.split('Package Summary:');
+
       console.log(
-        '\n\n\x1b[2m=========== \x1b[4miTunes Application Loader Output\x1b[24m ===========\x1b[0m',
+        '\n\n\x1b[2m=========== \x1b[4miTunes Application Loader Output\x1b[24m ===========\x1b[0m'
       );
-      console.log(output.split('Package Summary:')[1].trim() || output);
-      console.log('\x1b[2m========================================================\x1b[0m');
+      console.log(split[1] ? split[1].trim() : split[0]);
+      console.log(
+        '\x1b[2m========================================================\x1b[0m'
+      );
 
       resolve();
     });
@@ -64,7 +72,9 @@ const uploadBinary = async path => {
   }
   if (platform === 'ANDROID') {
     const spinner = ora('Copying binary to Desktop').start();
-    fs.createReadStream(path).pipe(fs.createWriteStream(os.homedir() + '/Desktop/android.apk'));
+    fs
+      .createReadStream(path)
+      .pipe(fs.createWriteStream(os.homedir() + '/Desktop/android.apk'));
     spinner.succeed();
     notify('Build succeeded!');
   }
@@ -72,5 +82,5 @@ const uploadBinary = async path => {
 
 module.exports = {
   uploadBinary,
-  uploadBinaryIos,
+  uploadBinaryIos
 };

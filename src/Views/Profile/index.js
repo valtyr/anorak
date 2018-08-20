@@ -7,9 +7,21 @@ import formatBirthday from '../../Helpers/formatBirthday';
 import formatPhoneNumber from '../../Helpers/formatPhoneNumber';
 import {edgeToNode} from '../../Helpers/graphql';
 
-import {ProfilePicture, Grid, Screen, TitleBar} from '../../Components';
+import {
+  ProfilePicture,
+  Grid,
+  Screen,
+  TitleBar,
+  BackButton
+} from '../../Components';
 import {blue} from '../../Consts/gradients';
-import {Hero, ProfileItem, NameAndGroup, Bitmoji, CurrentPeriod} from './components';
+import {
+  Hero,
+  ProfileItem,
+  NameAndGroup,
+  Bitmoji,
+  CurrentPeriod
+} from './components';
 
 class Profile extends Component {
   render() {
@@ -19,16 +31,28 @@ class Profile extends Component {
     const formattedBirthday = () => formatBirthday(user.birthday);
     const formattedPhone = () => formatPhoneNumber(user.phone.number);
     const phoneUrl = () =>
-      user.phone.countryCode ? `tel:+${user.phone.countryCode}${user.phone.number}` : `tel:${user.phone.number}`;
+      user.phone.countryCode
+        ? `tel:+${user.phone.countryCode}${user.phone.number}`
+        : `tel:${user.phone.number}`;
     const groupMates = edgeToNode(data.groupMates);
 
     return (
-      <Screen title={user && user.name.split(' ')[0]} gradient={blue}>
-        <Hero profileImageHash={user && user.imageHash} status={user && user.status} />
+      <Screen
+        title={user && user.name.split(' ')[0]}
+        gradient={blue}
+        onBack={() => navigation.goBack()}
+      >
+        <Hero
+          profileImageHash={user && user.imageHash}
+          status={user && user.status}
+          onBack={() => navigation.onBack()}
+        />
         {user && (
           <View style={style.userInfo}>
             <NameAndGroup name={user.name} group={user.group} />
-            {user.timetable && <CurrentPeriod period={user.timetable.currentPeriod} />}
+            {user.timetable && (
+              <CurrentPeriod period={user.timetable.currentPeriod} />
+            )}
             <ProfileItem
               title="Farsími"
               content={formattedPhone()}
@@ -46,8 +70,14 @@ class Profile extends Component {
               <ProfileItem
                 title="Snapchat"
                 content={`@${user.snapchatUsername}`}
-                iconComponent={() => <Bitmoji size={30} username={user.snapchatUsername} />}
-                onPress={() => Linking.openURL(`https://www.snapchat.com/add/${user.snapchatUsername}`)}
+                iconComponent={() => (
+                  <Bitmoji size={30} username={user.snapchatUsername} />
+                )}
+                onPress={() =>
+                  Linking.openURL(
+                    `https://www.snapchat.com/add/${user.snapchatUsername}`
+                  )
+                }
                 chevron
               />
             )}
@@ -56,7 +86,9 @@ class Profile extends Component {
                 title="Facebook Messenger"
                 content={`@${user.facebookUsername}`}
                 icon="messenger"
-                onPress={() => Linking.openURL(`https://www.m.me/${user.facebookUsername}`)}
+                onPress={() =>
+                  Linking.openURL(`https://www.m.me/${user.facebookUsername}`)
+                }
               />
             )}
             {user.instagramUsername && (
@@ -64,10 +96,18 @@ class Profile extends Component {
                 title="Instagram"
                 content={`@${user.instagramUsername}`}
                 icon="instagram"
-                onPress={() => Linking.openURL(`https://instagram.com/${user.instagramUsername}`)}
+                onPress={() =>
+                  Linking.openURL(
+                    `https://instagram.com/${user.instagramUsername}`
+                  )
+                }
               />
             )}
-            <ProfileItem title="Afmæli" content={formattedBirthday()} icon="birthday" />
+            <ProfileItem
+              title="Afmæli"
+              content={formattedBirthday()}
+              icon="birthday"
+            />
 
             {/* {groupMates && (
                 <Grid
@@ -93,14 +133,14 @@ const style = StyleSheet.create({
   userInfo: {
     paddingLeft: 25,
     paddingRight: 25,
-    marginBottom: 50,
+    marginBottom: 90
   },
   bitmoji: {
     height: 35,
     width: 35,
     transform: [{rotate: '10deg'}],
-    marginTop: -5,
-  },
+    marginTop: -5
+  }
 });
 
 const ProfileQuery = gql`
@@ -146,7 +186,7 @@ const ProfileQuery = gql`
 export default graphql(ProfileQuery, {
   options: ({navigation}) => ({
     variables: {
-      id: navigation.state.params.id,
-    },
-  }),
+      id: navigation.state.params.id
+    }
+  })
 })(Profile);

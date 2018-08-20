@@ -5,12 +5,16 @@ import {ProfilePicture} from '../../../Components';
 import {pluralFormatter} from '../../../Consts/formatters';
 
 const Birthdays = ({birthdays, onPress}) => {
-  return (
-    <View>
-      <Text style={style.heading}>Afmæli</Text>
-      {birthdays &&
-        birthdays.map(user => (
-          <TouchableOpacity key={user.id} onPress={() => onPress(user.id)} style={style.user}>
+  if (birthdays && birthdays.length !== 0) {
+    return (
+      <View>
+        <Text style={style.heading}>Afmæli</Text>
+        {birthdays.map(user => (
+          <TouchableOpacity
+            key={user.id}
+            onPress={() => onPress(user.id)}
+            style={style.user}
+          >
             <ProfilePicture hash={user && user.imageHash} width={50} />
             <View style={style.text}>
               <View>
@@ -23,8 +27,10 @@ const Birthdays = ({birthdays, onPress}) => {
             </View>
           </TouchableOpacity>
         ))}
-    </View>
-  );
+      </View>
+    );
+  }
+  return null;
 };
 
 const style = StyleSheet.create({
@@ -33,30 +39,30 @@ const style = StyleSheet.create({
     paddingRight: 20,
     fontSize: 17,
     fontWeight: 'bold',
-    marginBottom: 15,
+    marginBottom: 15
   },
   user: {
     flexDirection: 'row',
     paddingLeft: 20,
     paddingRight: 20,
     marginBottom: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   text: {
     flex: 1,
     flexDirection: 'row',
-    marginLeft: 10,
+    marginLeft: 10
   },
   age: {
     color: 'rgb(145, 145, 145)',
     fontWeight: '600',
     fontStyle: 'italic',
-    marginTop: 3,
+    marginTop: 3
   },
   group: {
     color: 'rgb(145, 145, 145)',
-    marginLeft: 'auto',
-  },
+    marginLeft: 'auto'
+  }
 });
 
 export default Birthdays;

@@ -5,6 +5,8 @@ import {SecureStore, AppLoading} from 'expo';
 import GraphQLProvider from './src/Apollo';
 import {TOKEN_KEY} from './src/Consts/vars';
 
+import {NetworkStatus} from './src/Components';
+
 import LoggedIn from './src/LoggedIn';
 import {Login} from './src/Views';
 
@@ -13,7 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       splashScreen: true,
-      token: null,
+      token: null
     };
   }
 
@@ -32,15 +34,19 @@ class App extends Component {
     if (this.state.splashScreen) return <AppLoading />;
     if (authenticated) {
       return (
-        <GraphQLProvider token={this.state.token}>
-          <LoggedIn initializeApp={this.initializeApp} />
-        </GraphQLProvider>
+        <NetworkStatus>
+          <GraphQLProvider token={this.state.token}>
+            <LoggedIn initializeApp={this.initializeApp} />
+          </GraphQLProvider>
+        </NetworkStatus>
       );
     }
     return (
-      <GraphQLProvider>
-        <Login initializeApp={this.initializeApp} />
-      </GraphQLProvider>
+      <NetworkStatus>
+        <GraphQLProvider>
+          <Login initializeApp={this.initializeApp} />
+        </GraphQLProvider>
+      </NetworkStatus>
     );
   }
 }

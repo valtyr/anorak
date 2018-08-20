@@ -6,7 +6,17 @@ import {View} from 'react-native';
 
 import {TabNavigator, StackNavigator} from 'react-navigation';
 
-import {Yfirlit, Welcome, Profile, Leit, Annad, Stundaskra, Skirteini, Event} from './Views';
+import {
+  Yfirlit,
+  Welcome,
+  Profile,
+  Leit,
+  Annad,
+  Stundaskra,
+  Skirteini,
+  Event,
+  Post
+} from './Views';
 import {AnimatedTabBar, Button} from './Components';
 import {TOKEN_KEY} from './Consts/vars';
 
@@ -18,31 +28,35 @@ const Navigation = StackNavigator(
           Yfirlit: {screen: Yfirlit},
           Leit: {screen: Leit},
           Stundaskrá: {screen: Stundaskra},
-          Annað: {screen: Annad},
+          Annað: {screen: Annad}
         },
         {
           tabBarPosition: 'bottom',
           // swipeEnabled: true,
           animationEnabled: true,
           tabBarComponent: AnimatedTabBar,
-          lazy: false,
-        },
-      ),
+          lazy: false
+        }
+      )
     },
     Profile: {
-      screen: Profile,
+      screen: Profile
     },
     Skirteini: {
-      screen: Skirteini,
+      screen: Skirteini
     },
     Event: {
-      screen: Event,
+      screen: Event
     },
+    Post: {
+      screen: Post
+    }
   },
   {
     headerMode: 'none',
-    cardStyle: {backgroundColor: 'white'},
-  },
+    // initialRouteName: 'Frett',
+    cardStyle: {backgroundColor: 'white'}
+  }
 );
 
 export default Navigation;

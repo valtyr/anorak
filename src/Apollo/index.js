@@ -9,14 +9,16 @@ import {onError} from 'apollo-link-error';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
 const uribase = __DEV__ ? 'https://v.anorak.is' : 'https://api.anorak.is';
-// const uribase = 'https://api.anorak.is';
+// const uribase = 'http://localhost:5000';
 const uri = endpoint => `${uribase}/${endpoint}`;
 
 const generateClient = token => {
   const errorHandlerLink = onError(({graphQLErrors, networkError}) => {
     if (graphQLErrors)
       graphQLErrors.map(({message, locations, path}) =>
-        console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
       );
 
     if (networkError) console.log(`[Network error]: ${networkError}`);
@@ -27,8 +29,8 @@ const generateClient = token => {
     const authMiddleware = new ApolloLink((operation, forward) => {
       operation.setContext({
         headers: {
-          authorization: `Bearer ${token}`,
-        },
+          authorization: `Bearer ${token}`
+        }
       });
 
       return forward(operation);
@@ -38,7 +40,7 @@ const generateClient = token => {
 
     return new ApolloClient({
       link: concat(authMiddleware, link),
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache()
     });
   }
 
@@ -47,7 +49,7 @@ const generateClient = token => {
 
   return new ApolloClient({
     link: link,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache()
   });
 };
 

@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, StatusBar, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  StatusBar,
+  Dimensions
+} from 'react-native';
 import {LinearGradient} from 'expo';
 
 import Svg, {Polygon, Path} from 'react-native-svg';
@@ -11,7 +18,6 @@ const Hero = ({profileImageHash, status}) => {
 
   return (
     <View style={style.hero}>
-      <StatusBar barStyle="light-content" />
       <LinearGradient {...main} style={style.gradient}>
         <Svg style={style.cutout}>
           <Path
@@ -27,11 +33,11 @@ const Hero = ({profileImageHash, status}) => {
 
 const style = StyleSheet.create({
   gradient: {
-    height: 1120,
+    height: 1120
   },
   hero: {
     backgroundColor: 'transparent',
-    marginTop: -1000,
+    marginTop: -1000
   },
   cutout: {
     position: 'absolute',
@@ -39,8 +45,8 @@ const style = StyleSheet.create({
     left: 0,
     right: 0,
     height: 40,
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
 export default Hero;
