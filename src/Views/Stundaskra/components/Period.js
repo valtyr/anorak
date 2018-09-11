@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback, LayoutAnimation} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  LayoutAnimation
+} from 'react-native';
 
 import {timeFormatter} from '../../../Helpers/formatters';
 import weekdays from '../../../Consts/weekdays';
 
 const First = ({period}) => (
   <View style={[styles.root, {padding: 15}]}>
-    <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 5}}>{period.title}</Text>
+    <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 5}}>
+      {period.title}
+    </Text>
     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
       <Text style={{fontWeight: '600'}}>
-        {period.classroom} — {period.teacher}
+        {period.classroom}
+        {period.teacher && period.teacher.length <= 6 && `— ${period.teacher}`}
       </Text>
       <Text style={{fontWeight: '600'}}>
         {timeFormatter(period.startTime)} – {timeFormatter(period.endTime)}
@@ -22,7 +31,7 @@ class Period extends Component {
   constructor() {
     super();
     this.state = {
-      expanded: false,
+      expanded: false
     };
   }
 
@@ -37,17 +46,22 @@ class Period extends Component {
     if (first) return <First period={period} />;
 
     return (
-      <TouchableWithoutFeedback onPress={() => this.setState({expanded: !expanded})}>
+      <TouchableWithoutFeedback
+        onPress={() => this.setState({expanded: !expanded})}
+      >
         <View>
           {lastPeriod &&
             lastPeriod.weekday !== period.weekday && (
-              <Text style={styles.separator}>{weekdays[period.weekday].toUpperCase()}</Text>
+              <Text style={styles.separator}>
+                {weekdays[period.weekday].toUpperCase()}
+              </Text>
             )}
           <View style={styles.root}>
             <View style={styles.period}>
               <Text style={styles.periodTitle}>{period.title}</Text>
               <Text style={styles.periodTime}>
-                {timeFormatter(period.startTime)} – {timeFormatter(period.endTime)}
+                {timeFormatter(period.startTime)} –{' '}
+                {timeFormatter(period.endTime)}
               </Text>
             </View>
             {expanded && (
@@ -78,37 +92,37 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 5,
-    marginBottom: 15,
+    marginBottom: 15
   },
   period: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 15,
+    padding: 15
   },
   periodTitle: {
     color: 'rgb(147, 147, 147)',
-    fontWeight: '600',
+    fontWeight: '600'
   },
   periodTime: {
     color: 'rgb(147, 147, 147)',
-    fontWeight: '600',
+    fontWeight: '600'
   },
   expanded: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 15,
     borderTopColor: 'rgb(235, 235, 235)',
-    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopWidth: StyleSheet.hairlineWidth
   },
   detail: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   detailContent: {
-    fontSize: 14,
+    fontSize: 14
   },
   detailTitle: {
     fontSize: 11,
-    color: 'rgb(147, 147, 147)',
+    color: 'rgb(147, 147, 147)'
   },
   separator: {
     textAlign: 'center',
@@ -116,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontWeight: '700',
     fontStyle: 'italic',
-    color: 'rgb(147, 147, 147)',
-  },
+    color: 'rgb(147, 147, 147)'
+  }
 });
 export default Period;

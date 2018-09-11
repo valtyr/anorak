@@ -16,11 +16,12 @@ const getNextPeriodIndex = periods => {
     const periodEndHour = Number(periodEndSplit[0]);
     const periodEndMinutes = Number(periodEndSplit[1]);
     if (
-      period.weekday >= now.getDay() - 1 &&
-      periodEndHour >= now.getHours() &&
-      periodEndMinutes >= now.getMinutes()
+      period.weekday > now.getDay() - 1 ||
+      (period.weekday === now.getDay() - 1 &&
+        periodEndHour >= now.getHours() &&
+        periodEndMinutes >= now.getMinutes())
     ) {
-      return index;
+      return Number(index);
     }
   }
   return 0;
@@ -30,10 +31,8 @@ const sortedPeriods = periods => {
   if (!periods) return null;
   const doublePeriods = periods.concat(periods);
   const nextPeriodIndex = getNextPeriodIndex(periods);
-  return doublePeriods.slice(
-    nextPeriodIndex,
-    nextPeriodIndex + periods.length - 1
-  );
+  console.log(nextPeriodIndex, periods.length, nextPeriodIndex);
+  return doublePeriods.slice(nextPeriodIndex, periods.length + nextPeriodIndex);
 };
 
 const Stundaskra = ({data, fetchTimetable}) => {
