@@ -9,7 +9,7 @@ const Welcome = ({navigation}) => (
     <StatusBar barStyle="dark-content" />
     <Particles>
       <View style={styles.content}>
-        <Text style={styles.title}>anorak.</Text>
+        <Text style={styles.title}>anorak</Text>
         <Button
           title="Skrá inn"
           onPress={() => navigation.navigate('LoginKennitala')}
