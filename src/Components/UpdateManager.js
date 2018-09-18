@@ -125,6 +125,7 @@ class UpdateManager extends Component {
   onActiveAfterWhile = () => {
     const {updateAvailable} = this.state;
     if (updateAvailable) this.reload();
+    else this.checkForUpdate();
   };
 
   render() {

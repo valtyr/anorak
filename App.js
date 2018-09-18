@@ -5,7 +5,7 @@ import {SecureStore, AppLoading} from 'expo';
 import GraphQLProvider from './src/Apollo';
 import {TOKEN_KEY} from './src/Consts/vars';
 
-import {ErrorReporting, Analytics, AppState} from './src/Services';
+import {ErrorReporting, Analytics} from './src/Services';
 
 import {
   NetworkStatus,
@@ -27,12 +27,6 @@ class App extends Component {
 
   componentDidMount() {
     this.initializeApp();
-
-    // AppState.subscribeToActive(() => alert('Foregrounded'));
-    // AppState.subscribeToBackground(() => alert('Backgrounded'));
-    AppState.subscribeToActiveAfterWhile(() =>
-      alert('Foregrounded after while')
-    );
   }
 
   initializeApp = async () => {
