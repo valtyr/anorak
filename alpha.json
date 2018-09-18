@@ -20,7 +20,7 @@
     "fallbackToCacheTimeout": 0
   },
   "ios": {
-    "bundleIdentifier": "is.anorak.anorak",
+    "bundleIdentifier": "is.anorak.alpha",
     "buildNumber": "1",
     "supportsTablet": false,
     "loadJSInBackgroundExperimental": true
