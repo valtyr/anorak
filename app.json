@@ -4,7 +4,7 @@
     "description": "The app for anorak.",
     "slug": "anorak-client",
     "privacy": "unlisted",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "30.0.0",
     "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/app-icon.png",
@@ -12,6 +12,9 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
@@ -21,6 +24,19 @@
       "buildNumber": "1",
       "supportsTablet": false,
       "loadJSInBackgroundExperimental": true
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "anorak",
+            "project": "anorak-client",
+            "authToken":
+              "522c39a27477406887d5619f8fc7b76e3e5f7cc5c58c4a128bcc85a9a080dcfa"
+          }
+        }
+      ]
     }
   }
 }
