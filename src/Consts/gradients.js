@@ -28,6 +28,12 @@ export const light = {
   end: [1, 0]
 };
 
+export const lightGray = {
+  colors: ['#f0f0f0', '#f0f0f0'],
+  start: [0, 0],
+  end: [1, 0]
+};
+
 export const imageVignette = {
   colors: ['transparent', 'black']
 };

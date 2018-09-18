@@ -1,17 +1,28 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native';
 import {LinearGradient} from 'expo';
 
-import {main} from '../Consts/gradients';
+import {main, lightGray} from '../Consts/gradients';
 
 const callIfActive = (active, func) => {
   if (active) func();
 };
 
-const ButtonBG = ({children, isActive}) => {
+const ButtonBG = ({children, isActive, secondary}) => {
+  const gradient = secondary ? lightGray : main;
+
   if (isActive) {
     return (
-      <LinearGradient {...main} style={[styles.root]}>
+      <LinearGradient
+        {...gradient}
+        style={[styles.root, secondary && styles.secondaryRoot]}
+      >
         {children}
       </LinearGradient>
     );
@@ -19,10 +30,21 @@ const ButtonBG = ({children, isActive}) => {
   return <View style={[styles.root, styles.inactive]}>{children}</View>;
 };
 
-const Button = ({title, onPress, isActive = true, loading = false}) => (
-  <TouchableOpacity onPress={() => callIfActive(isActive, onPress)} activeOpacity={isActive ? 0.6 : 1}>
-    <ButtonBG isActive={isActive}>
-      <Text style={styles.title}>{title && title.toUpperCase()}</Text>
+const Button = ({
+  title,
+  onPress,
+  isActive = true,
+  loading = false,
+  secondary
+}) => (
+  <TouchableOpacity
+    onPress={() => callIfActive(isActive, onPress)}
+    activeOpacity={isActive ? 0.6 : 1}
+  >
+    <ButtonBG isActive={isActive} secondary={secondary}>
+      <Text style={[styles.title, secondary && styles.secondaryTitle]}>
+        {title && title.toUpperCase()}
+      </Text>
       {loading && (
         <View style={styles.loadingIndicator}>
           <ActivityIndicator color="white" />
@@ -38,20 +60,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 1000,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   inactive: {
-    backgroundColor: 'rgb(227, 225, 225)',
+    backgroundColor: 'rgb(227, 225, 225)'
   },
   loadingIndicator: {
-    marginLeft: 10,
+    marginLeft: 10
   },
   title: {
     color: 'white',
     textAlign: 'center',
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 18
   },
+  secondaryRoot: {
+    padding: 10
+  },
+  secondaryTitle: {
+    color: 'rgb(190, 190, 190)',
+    fontSize: 14
+  }
 });
 
 export default Button;

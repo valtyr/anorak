@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text, NetInfo, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  NetInfo,
+  StyleSheet,
+  StatusBar,
+  SafeAreaView
+} from 'react-native';
 
 import Particles from './Particles';
+import Button from './Button';
 
 class NetworkStatus extends Component {
   state = {
@@ -28,12 +36,18 @@ class NetworkStatus extends Component {
     if (networkStatus === 'none') {
       return (
         <Particles>
+          <StatusBar barStyle="dark-content" animated />
           <View style={styles.root}>
             <Text style={styles.heading}>Engin nettenging</Text>
             <Text style={styles.explanation}>
               Þú þarft að tengjast netinu til að nota anorak
             </Text>
           </View>
+          <SafeAreaView>
+            <View style={styles.tryAgain}>
+              <Button onPress={this.getNetworkStatus} title="Reyna aftur" />
+            </View>
+          </SafeAreaView>
         </Particles>
       );
     }
@@ -56,6 +70,10 @@ const styles = StyleSheet.create({
   explanation: {
     paddingLeft: 20,
     paddingRight: 20
+  },
+  tryAgain: {
+    paddingLeft: 15,
+    paddingRight: 15
   }
 });
 
