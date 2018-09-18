@@ -3,8 +3,8 @@
   "description": "The app for anorak.",
   "slug": "anorak-client",
   "privacy": "unlisted",
-  "sdkVersion": "25.0.0",
-  "version": "1.0.2",
+  "sdkVersion": "30.0.0",
+  "version": "1.0.3",
   "orientation": "portrait",
   "icon": "./assets/alpha-icon.png",
   "splash": {
@@ -16,10 +16,26 @@
     "assetExts": ["ttf", "mp4"],
     "nonPersistent": "--nonPersistent"
   },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
   "ios": {
-    "bundleIdentifier": "is.anorak.alpha",
+    "bundleIdentifier": "is.anorak.anorak",
     "buildNumber": "1",
     "supportsTablet": false,
     "loadJSInBackgroundExperimental": true
+  },
+  "hooks": {
+    "postPublish": [
+      {
+        "file": "sentry-expo/upload-sourcemaps",
+        "config": {
+          "organization": "anorak",
+          "project": "anorak-client",
+          "authToken":
+            "522c39a27477406887d5619f8fc7b76e3e5f7cc5c58c4a128bcc85a9a080dcfa"
+        }
+      }
+    ]
   }
 }
