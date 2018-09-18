@@ -35,18 +35,18 @@ const Events = ({onPress}) => (
       data={[
         {
           name: 'Árshátíð Framtíðarinnar',
-          id: 1,
+          id: '1',
           img: 'http://ogn.imgix.net/aron.png'
         },
         {
           name: 'Sumarferð Skólafélagsins',
-          id: 2,
+          id: '2',
           img:
             'https://res.cloudinary.com/jerrick/image/upload/f_auto,fl_progressive,q_auto,c_fit,w_1140/uyzsg5vkrtqf1wyupzqz'
         },
         {
           name: 'Miðannarball Framtíðarinnar',
-          id: 3,
+          id: '3',
           img:
             'https://bizbash-production.imgix.net/content/editorial/storyimg/big/jan2017_daybreakers_kkb_8315.jpg?auto=format'
         }
