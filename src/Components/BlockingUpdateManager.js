@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Updates} from 'expo';
 
-import {ErrorReporting} from '../Services';
+import {ErrorReporting, AppState} from '../Services';
 
 import Particles from './Particles';
 
@@ -19,6 +19,11 @@ class BlockingUpdateManager extends Component {
 
   componentDidMount() {
     this.checkForUpdate();
+    this.subscription = AppState.subscribeToActive(() => this.checkForUpdate());
+  }
+
+  componentWillUnmount() {
+    this.subscription.unsubscribe();
   }
 
   checkForUpdate = async () => {
