@@ -12,7 +12,7 @@ import {Birthdays, Events, HeroImage, Posts} from './components';
 const Yfirlit = ({data, navigation}) => (
   <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
     <Hero />
-    <TitleBar title="Yfirlitssss" white />
+    <TitleBar title="Yfirlit" white />
     <HeroImage
       nextPeriod={
         data.currentUser &&
