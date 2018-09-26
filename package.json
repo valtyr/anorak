@@ -8,10 +8,14 @@
   "scripts": {
     "lint": "eslint .",
     "publish": "exp publish",
-    "bi-alpha": "exp bi --release-channel alpha --no-publish --config alpha.json",
-    "bi": "exp bi --no-publish",
+    "bi-alpha":
+      "exp bi --release-channel alpha --no-publish --config alpha.json",
     "poll-build-ios": "node scripts/poll-build/index.js --ios",
-    "poll-build-android": "node scripts/poll-build/index.js --android"
+    "poll-build-android": "node scripts/poll-build/index.js --android",
+    "bi": "exp bi --no-publish --no-wait && yarn poll-build-ios",
+    "bi-alpha":
+      "exp bi --release-channel alpha --no-publish --no-wait --config alpha.json && yarn poll-build-ios",
+    "promote-release": "node scripts/release-tools/index.js"
   },
   "dependencies": {
     "apollo-client-preset": "^1.0.6",
@@ -33,7 +37,8 @@
     "prettier": "^1.7.4",
     "react": "16.3.1",
     "react-apollo": "^2.0.4",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-fade-in-view": "^1.0.5",
     "react-native-gridview": "^0.1.1",
     "react-native-hyperlink": "^0.0.14",
@@ -46,5 +51,13 @@
     "shallowequal": "^1.0.2",
     "sync-request": "^6.0.0",
     "zen-observable": "^0.8.9"
+  },
+  "devDependencies": {
+    "app-root-path": "^2.1.0",
+    "cli-table": "^0.3.1",
+    "compare-versions": "^3.4.0",
+    "inquirer": "^6.2.0",
+    "ora": "^3.0.0",
+    "xdl": "^51.3.1"
   }
 }
