@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "publish": "exp publish",
-    "bi-alpha": "exp bi --release-channel alpha --no-publish --no-wait --config alpha.json && yarn poll-build-ios",
+    "bi-alpha":
+      "exp bi --release-channel alpha --no-publish --no-wait && yarn poll-build-ios",
     "poll-build-ios": "node scripts/poll-build/index.js --ios",
     "poll-build-android": "node scripts/poll-build/index.js --android",
     "bi": "exp bi --no-publish --no-wait && yarn poll-build-ios",
@@ -35,7 +36,8 @@
     "prettier": "^1.7.4",
     "react": "16.3.1",
     "react-apollo": "^2.0.4",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-fade-in-view": "^1.0.5",
     "react-native-gridview": "^0.1.1",
     "react-native-hyperlink": "^0.0.14",
