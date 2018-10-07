@@ -84,39 +84,41 @@ class Screen extends Component {
           }}
         >
           <LinearGradient style={styles.navbar} {...gradient}>
-            <SafeAreaView style={styles.navbarContent}>
-              <Animated.Text
-                style={[
-                  light ? styles.lightTitle : styles.title,
-                  {
-                    opacity: this.state.scrollY.interpolate(
-                      {
-                        inputRange: [0, 30],
-                        outputRange: [0, 1]
-                      },
-                      {useNativeDriver: true}
-                    )
-                  }
-                ]}
-              >
-                {title}
-              </Animated.Text>
-              {onBack && (
-                <SafeAreaView style={styles.backButton}>
-                  <BackButton
-                    labelVisible={true}
-                    onPress={onBack}
-                    grey={light}
-                    labelOpacity={this.state.scrollY.interpolate(
-                      {
-                        inputRange: [0, 30],
-                        outputRange: [1, 0]
-                      },
-                      {useNativeDriver: true}
-                    )}
-                  />
-                </SafeAreaView>
-              )}
+            <SafeAreaView>
+              <View style={styles.navbarContent}>
+                <Animated.Text
+                  style={[
+                    light ? styles.lightTitle : styles.title,
+                    {
+                      opacity: this.state.scrollY.interpolate(
+                        {
+                          inputRange: [0, 30],
+                          outputRange: [0, 1]
+                        },
+                        {useNativeDriver: true}
+                      )
+                    }
+                  ]}
+                >
+                  {title}
+                </Animated.Text>
+                {onBack && (
+                  <SafeAreaView style={styles.backButton}>
+                    <BackButton
+                      labelVisible={true}
+                      onPress={onBack}
+                      grey={light}
+                      labelOpacity={this.state.scrollY.interpolate(
+                        {
+                          inputRange: [0, 30],
+                          outputRange: [1, 0]
+                        },
+                        {useNativeDriver: true}
+                      )}
+                    />
+                  </SafeAreaView>
+                )}
+              </View>
             </SafeAreaView>
           </LinearGradient>
         </Animated.View>
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
         paddingTop: 25
       },
       ios: {
-        height: 90
+        height: 44
       }
     })
   },
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
         paddingTop: 25
       },
       ios: {
-        height: 90
+        height: 44
       }
     })
   },
@@ -182,7 +184,7 @@ const styles = StyleSheet.create({
       ios: 0
     }),
     justifyContent: 'center',
-    height: 90
+    height: 44
   },
   lightTitle: {
     marginTop: 10,
