@@ -13,6 +13,7 @@
     "poll-build-ios": "node scripts/poll-build/index.js --ios",
     "poll-build-android": "node scripts/poll-build/index.js --android",
     "bi": "exp bi --no-publish --no-wait && yarn poll-build-ios",
+    "ba": "exp ba --no-publish --no-wait && yarn poll-build-android",
     "promote-release": "node scripts/release-tools/index.js"
   },
   "dependencies": {

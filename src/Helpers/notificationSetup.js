@@ -1,4 +1,5 @@
-import {Permissions, Notifications, Platform} from 'expo';
+import {Platform} from 'react-native';
+import {Permissions, Notifications} from 'expo';
 
 export const registerForNotifications = async mutation => {
   if (Platform.OS === 'android') {
