@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView
+} from 'react-native';
 // import {SafeAreaView} from 'react-native-safe-area-view';
 
 const Tab = ({title, active, onPress}) => (
   <TouchableOpacity style={style.tab} onPress={onPress}>
     <View style={active && style.underline}>
-      <Text style={!active ? style.tabTitle : style.tabTitleActive}>{title}</Text>
+      <Text style={!active ? style.tabTitle : style.tabTitleActive}>
+        {title}
+      </Text>
     </View>
   </TouchableOpacity>
 );
@@ -30,7 +38,7 @@ const TabBar = ({navigation}) => {
 
 const style = StyleSheet.create({
   root: {
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   tabBar: {
     flexDirection: 'row',
@@ -40,25 +48,26 @@ const style = StyleSheet.create({
     shadowOffset: {width: 0, height: -6},
     alignItems: 'center',
     justifyContent: 'space-between',
+    zIndex: 400,
 
     paddingLeft: 20,
-    paddingRight: 20,
+    paddingRight: 20
   },
   tab: {
     paddingTop: 15,
-    paddingBottom: 15,
+    paddingBottom: 15
   },
   tabTitle: {
-    color: '#999999',
+    color: '#999999'
   },
   underline: {
     borderBottomWidth: 2,
-    borderBottomColor: 'black',
+    borderBottomColor: 'black'
   },
   tabTitleActive: {
     backgroundColor: 'transparent',
-    fontWeight: '600',
-  },
+    fontWeight: '600'
+  }
 });
 
 export default TabBar;

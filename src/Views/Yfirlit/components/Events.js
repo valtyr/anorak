@@ -13,9 +13,13 @@ import {imageVignette} from '../../../Consts/gradients';
 
 const Event = ({event, index, onPress}) => (
   <View style={[style.itemWrapper, index === 0 && style.first]}>
-    <TouchableOpacity style={style.item} activeOpacity={0.6} onPress={onPress}>
+    <TouchableOpacity
+      style={style.item}
+      activeOpacity={0.6}
+      onPress={() => onPress(event.id)}
+    >
       <Image
-        source={{uri: event.img}}
+        source={event.photoUrl && {uri: event.photoUrl}}
         height={120}
         width={120}
         style={style.image}
@@ -26,37 +30,21 @@ const Event = ({event, index, onPress}) => (
   </View>
 );
 
-const Events = ({onPress}) => (
+const Events = ({onPress, events}) => (
   <View>
     <Text style={style.heading}>Viðburðir</Text>
-    <FlatList
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      data={[
-        {
-          name: 'Árshátíð Framtíðarinnar',
-          id: '1',
-          img: 'http://ogn.imgix.net/aron.png'
-        },
-        {
-          name: 'Sumarferð Skólafélagsins',
-          id: '2',
-          img:
-            'https://res.cloudinary.com/jerrick/image/upload/f_auto,fl_progressive,q_auto,c_fit,w_1140/uyzsg5vkrtqf1wyupzqz'
-        },
-        {
-          name: 'Miðannarball Framtíðarinnar',
-          id: '3',
-          img:
-            'https://bizbash-production.imgix.net/content/editorial/storyimg/big/jan2017_daybreakers_kkb_8315.jpg?auto=format'
-        }
-      ]}
-      keyExtractor={e => e.id}
-      renderItem={event => (
-        <Event event={event.item} index={event.index} onPress={onPress} />
-      )}
-      style={style.list}
-    />
+    {events && (
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={events}
+        keyExtractor={e => e.id}
+        renderItem={event => (
+          <Event event={event.item} index={event.index} onPress={onPress} />
+        )}
+        style={style.list}
+      />
+    )}
   </View>
 );
 

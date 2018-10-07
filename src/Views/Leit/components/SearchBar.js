@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
@@ -23,8 +29,15 @@ const SearchBar = ({search, onChangeText}) => {
         />
         {search !== '' &&
           search && (
-            <TouchableOpacity style={style.closeButton} onPress={() => onChangeText('')}>
-              <MaterialCommunityIcons name="close-circle" size={20} color="rgb(228, 228, 228)" />
+            <TouchableOpacity
+              style={style.closeButton}
+              onPress={() => onChangeText('')}
+            >
+              <MaterialCommunityIcons
+                name="close-circle"
+                size={20}
+                color="rgb(228, 228, 228)"
+              />
             </TouchableOpacity>
           )}
       </View>
@@ -35,7 +48,9 @@ const SearchBar = ({search, onChangeText}) => {
 const style = StyleSheet.create({
   root: {
     position: 'relative',
-    zIndex: 10,
+    zIndex: 20,
+    paddingBottom: 20,
+    marginBottom: -20
   },
   barContainer: {
     paddingRight: 15,
@@ -52,18 +67,19 @@ const style = StyleSheet.create({
     alignItems: 'center',
     elevation: 10,
     backgroundColor: 'white',
+    zIndex: 10
   },
   input: {
     flex: 1,
     marginLeft: 10,
     fontSize: 17,
     height: 50,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   icon: {
     width: 20,
-    height: 20,
-  },
+    height: 20
+  }
 });
 
 export default SearchBar;

@@ -4,17 +4,19 @@ import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {timeFormatter} from '../../../Helpers/formatters';
 import {weekdaysDefiniteArticle} from '../../../Consts/weekdays';
 
-const HeroImage = ({nextPeriod, onPeriodPress}) => {
+const HeroImage = ({nextPeriod, onPeriodPress, url}) => {
   return (
     <View style={style.heroContent}>
-      <View style={style.heroImageContainer}>
-        <Image
-          source={{
-            uri: 'https://ogn.imgix.net/fordistokkur.jpg'
-          }}
-          style={style.heroImage}
-        />
-      </View>
+      {url && (
+        <View style={style.heroImageContainer}>
+          <Image
+            source={{
+              uri: url
+            }}
+            style={style.heroImage}
+          />
+        </View>
+      )}
       {nextPeriod && (
         <TouchableOpacity style={style.nextPeriod} onPress={onPeriodPress}>
           <Text style={style.desc}>Næsti tíminn þinn er</Text>

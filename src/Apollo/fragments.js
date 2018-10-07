@@ -15,14 +15,21 @@ export const userFragment = gql`
     image_hash
     access_enabled
 
-    phone
-    timetable
-    current_period
+    phone {
+      id
+      countryCode
+      number
+    }
 
     snapchat_username
     instagram_username
     facebook_username
 
-    school
+    school {
+      id
+      name
+      code
+      organization_name
+    }
   }
 `;

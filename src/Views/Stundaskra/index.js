@@ -36,10 +36,15 @@ const sortedPeriods = periods => {
 };
 
 const Stundaskra = ({data, fetchTimetable}) => {
+  // const periods =
+  //   data.currentUser &&
+  //   data.currentUser.timetable &&
+  //   sortedPeriods(data.currentUser.timetable.periods);
+
   const periods =
     data.currentUser &&
     data.currentUser.timetable &&
-    sortedPeriods(data.currentUser.timetable.periods);
+    data.currentUser.timetable.periods;
 
   if (!periods) return <FetchTimetable fetchTimetable={fetchTimetable} />;
 
@@ -67,7 +72,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   timetable: {
-    padding: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
     backgroundColor: 'transparent'
   }
 });

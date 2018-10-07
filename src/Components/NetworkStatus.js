@@ -69,11 +69,13 @@ const styles = StyleSheet.create({
   },
   explanation: {
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    textAlign: 'center'
   },
   tryAgain: {
     paddingLeft: 15,
-    paddingRight: 15
+    paddingRight: 15,
+    paddingBottom: 15
   }
 });
 

@@ -7,3 +7,4 @@ export {default as Annad} from './Annad';
 export {default as Stundaskra} from './Stundaskra';
 export {default as Skirteini} from './Skirteini';
 export {default as Post} from './Post';
+export {default as Tilbod} from './Tilbod';

@@ -24,7 +24,7 @@ class Leit extends Component {
   }
 
   updateQuery = query => this.setState({query});
-  updateQueryDebouced = debounce(this.updateQuery, 200, {maxWait: 200});
+  updateQueryDebouced = debounce(this.updateQuery, 500, {maxWait: 500});
 
   updateSearch = query => {
     this.setState({searchBarValue: query});
@@ -37,12 +37,12 @@ class Leit extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{flex: 1}}>
+          <Hero reverse gradient={mainReversed} />
           <SafeAreaView>
             <View style={styles.navbarDummy}>
               <Text style={styles.title}>Leit</Text>
             </View>
           </SafeAreaView>
-          <Hero noVerticalFill reverse gradient={mainReversed} />
           <TitleBar title="Leit" white />
           <SearchBar search={searchBarValue} onChangeText={this.updateSearch} />
           <ResultList
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
       android: {
         paddingTop: 25
       }
-    })
+    }),
+    marginTop: -50
   },
   title: {
     marginTop: 10,

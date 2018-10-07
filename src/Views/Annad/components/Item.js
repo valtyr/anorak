@@ -25,16 +25,17 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.05,
+    elevation: 2,
 
-    marginBottom: 20,
+    marginBottom: 20
   },
   icon: {
-    width: 40,
+    width: 40
   },
   title: {
     flex: 1,
     color: 'rgb(113, 113, 113)',
-    fontWeight: '500',
-  },
+    fontWeight: '500'
+  }
 });
 export default Item;

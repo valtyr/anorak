@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   RefreshControl,
   Animated,
@@ -31,7 +30,8 @@ class Screen extends Component {
       light,
       onBack,
       onRefresh,
-      refreshing
+      refreshing,
+      topPadding
     } = this.props;
 
     return (
@@ -54,6 +54,7 @@ class Screen extends Component {
             )
           }
         >
+          {topPadding && <View style={styles.topPadding} />}
           {children}
         </Animated.ScrollView>
         <Animated.View
@@ -65,8 +66,15 @@ class Screen extends Component {
             left: 0,
             right: 0,
             shadowRadius: 10,
-            shadowOpacity: 1,
-            opacity: this.state.scrollY.interpolate(
+            // shadowOpacity: 1,
+            // opacity: this.state.scrollY.interpolate(
+            //   {
+            //     inputRange: [0, 30],
+            //     outputRange: [0, 1]
+            //   },
+            //   {useNativeDriver: true}
+            // )
+            shadowOpacity: this.state.scrollY.interpolate(
               {
                 inputRange: [0, 30],
                 outputRange: [0, 1]
@@ -74,33 +82,41 @@ class Screen extends Component {
               {useNativeDriver: true}
             )
           }}
-          pointerEvents="none"
         >
           <LinearGradient style={styles.navbar} {...gradient}>
-            <SafeAreaView
-              style={[
-                styles.navbarContent,
-                onBack && styles.navbarContentWithBackButton
-              ]}
-            >
-              {onBack && (
-                <Animated.View
-                  style={{
+            <SafeAreaView style={styles.navbarContent}>
+              <Animated.Text
+                style={[
+                  light ? styles.lightTitle : styles.title,
+                  {
                     opacity: this.state.scrollY.interpolate(
                       {
-                        inputRange: [30, 50],
+                        inputRange: [0, 30],
                         outputRange: [0, 1]
                       },
                       {useNativeDriver: true}
                     )
-                  }}
-                >
-                  <BackButton labelVisible={false} onPress={onBack} grey />
-                </Animated.View>
-              )}
-              <Text style={light ? styles.lightTitle : styles.title}>
+                  }
+                ]}
+              >
                 {title}
-              </Text>
+              </Animated.Text>
+              {onBack && (
+                <SafeAreaView style={styles.backButton}>
+                  <BackButton
+                    labelVisible={true}
+                    onPress={onBack}
+                    grey={light}
+                    labelOpacity={this.state.scrollY.interpolate(
+                      {
+                        inputRange: [0, 30],
+                        outputRange: [1, 0]
+                      },
+                      {useNativeDriver: true}
+                    )}
+                  />
+                </SafeAreaView>
+              )}
             </SafeAreaView>
           </LinearGradient>
         </Animated.View>
@@ -114,24 +130,37 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     backgroundColor: 'white',
-    flexDirection: 'column-reverse'
+    flexDirection: 'column-reverse',
+    position: 'relative'
   },
-  navbar: {
-    zIndex: 10,
+  topPadding: {
     ...Platform.select({
       android: {
+        height: 75,
         paddingTop: 25
+      },
+      ios: {
+        height: 90
       }
     })
+  },
+  navbar: {
+    zIndex: 10
   },
   navbarContent: {
     flexDirection: 'row',
     marginLeft: 10,
     marginRight: 10,
-    alignItems: 'center'
-  },
-  navbarContentWithBackButton: {
-    marginRight: 30
+    alignItems: 'center',
+    ...Platform.select({
+      android: {
+        height: 75,
+        paddingTop: 25
+      },
+      ios: {
+        height: 90
+      }
+    })
   },
   scrollView: {
     flex: 1
@@ -146,7 +175,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flex: 1
   },
-
+  backButton: {
+    position: 'absolute',
+    top: Platform.select({
+      android: 5,
+      ios: 0
+    }),
+    justifyContent: 'center',
+    height: 90
+  },
   lightTitle: {
     marginTop: 10,
     marginBottom: 10,

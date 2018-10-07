@@ -7,6 +7,8 @@ export const init = () => {
   ).install();
 };
 
+export const setUserContext = user => Sentry.setUserContext(user);
+
 export const captureException = (error, logger) => {
   Sentry.captureException(error, {
     logger: logger

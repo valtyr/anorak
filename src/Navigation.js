@@ -15,7 +15,8 @@ import {
   Stundaskra,
   Skirteini,
   Event,
-  Post
+  Post,
+  Tilbod
 } from './Views';
 import {AnimatedTabBar, Button} from './Components';
 import {TOKEN_KEY} from './Consts/vars';
@@ -50,11 +51,14 @@ const Navigation = StackNavigator(
     },
     Post: {
       screen: Post
+    },
+    Tilbod: {
+      screen: Tilbod
     }
   },
   {
     headerMode: 'none',
-    // initialRouteName: 'Frett',
+    // initialRouteName: 'Tilbod',
     cardStyle: {backgroundColor: 'white'}
   }
 );

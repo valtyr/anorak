@@ -20,7 +20,9 @@ const Posts = ({posts, onPress}) => {
               <Image
                 style={style.image}
                 source={{
-                  uri: 'https://neminn.is/wp-content/uploads/2017/01/nfmh2.jpg'
+                  uri: `https://ogn.imgix.net/schoolicons/${
+                    post.school.code
+                  }.png`
                 }}
               />
               <View style={style.text}>

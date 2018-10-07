@@ -5,6 +5,7 @@ import {graphql, compose} from 'react-apollo';
 import {Notifications} from 'expo';
 
 import {registerForNotifications} from './Helpers/notificationSetup';
+import {ErrorReporting} from './Services';
 import Navigation from './Navigation';
 
 class LoggedIn extends Component {
@@ -41,14 +42,27 @@ class LoggedIn extends Component {
           'Innskráningarbeiðni',
           'Ýttu á "Leyfa" til að skrá þig inn á stjórnborð anorak. Ef þú varst ekki að reyna að skrá þig inn ýttu á "Hundsa"',
           [
-            {text: 'Hundsa', style: 'cancel', onPress: () => this.declineLoginRequest(notification.data.id)},
-            {text: 'Leyfa', onPress: () => this.acceptLoginRequest(notification.data.id)},
-          ],
+            {
+              text: 'Hundsa',
+              style: 'cancel',
+              onPress: () => this.declineLoginRequest(notification.data.id)
+            },
+            {
+              text: 'Leyfa',
+              onPress: () => this.acceptLoginRequest(notification.data.id)
+            }
+          ]
         );
       default:
-        return;
+        return Alert.alert('Tilkynning', '', [{text: 'Loka'}]);
     }
   };
+
+  componentDidUpdate(oldProps) {
+    const {data} = this.props;
+    if (data && data.currentUser)
+      ErrorReporting.setUserContext(data.currentUser);
+  }
 
   render() {
     const {initializeApp} = this.props;
@@ -80,29 +94,48 @@ const DeclineLoginRequestMutation = gql`
   }
 `;
 
+const UserQuery = gql`
+  query currentUser {
+    currentUser {
+      id
+      name
+      phone {
+        countrycode
+        number
+      }
+      school {
+        id
+        name
+        code
+      }
+    }
+  }
+`;
+
 export default compose(
   graphql(SetTokenMutation, {
     props: ({mutate}) => ({
       setToken: token =>
         mutate({
-          variables: {token},
-        }),
-    }),
+          variables: {token}
+        })
+    })
   }),
   graphql(AcceptLoginRequestMutation, {
     props: ({mutate}) => ({
       acceptLoginRequest: id =>
         mutate({
-          variables: {id},
-        }),
-    }),
+          variables: {id}
+        })
+    })
   }),
   graphql(DeclineLoginRequestMutation, {
     props: ({mutate}) => ({
       declineLoginRequest: id =>
         mutate({
-          variables: {id},
-        }),
-    }),
+          variables: {id}
+        })
+    })
   }),
+  graphql(UserQuery)
 )(LoggedIn);

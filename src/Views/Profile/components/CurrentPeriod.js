@@ -6,10 +6,10 @@ import {lightBlue} from '../../../Consts/gradients';
 
 const CurrentPeriod = ({period}) => {
   const startTime = period && period.startTime.split(':');
-  const startTimeFormatted = startTime && `${Number(startTime[0])}:${Number(startTime[1])}`;
+  const startTimeFormatted = startTime && `${startTime[0]}:${startTime[1]}`;
 
   const endTime = period && period.endTime.split(':');
-  const endTimeFormatted = endTime && `${Number(endTime[0])}:${Number(endTime[1])}`;
+  const endTimeFormatted = endTime && `${endTime[0]}:${endTime[1]}`;
 
   return (
     period && (
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowOffset: {width: 2, height: 4},
     shadowRadius: 10,
-    marginBottom: 30,
+    marginBottom: 30
   },
   title: {
     color: '#DCDAEE',
@@ -47,23 +47,23 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontStyle: 'italic',
     marginLeft: 10,
-    marginBottom: 10,
+    marginBottom: 10
   },
   lower: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   primary: {
     color: 'white',
     fontSize: 26,
-    fontWeight: '700',
+    fontWeight: '700'
   },
   secondary: {
     color: 'white',
     opacity: 0.8,
     fontSize: 16,
-    fontWeight: '600',
-  },
+    fontWeight: '600'
+  }
 });
 
 export default CurrentPeriod;

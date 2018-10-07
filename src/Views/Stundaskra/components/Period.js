@@ -92,7 +92,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 5,
-    marginBottom: 15
+    marginBottom: 15,
+    marginRight: 20,
+    marginLeft: 20,
+
+    elevation: 3
   },
   period: {
     flexDirection: 'row',

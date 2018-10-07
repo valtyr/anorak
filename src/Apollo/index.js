@@ -8,8 +8,16 @@ import {onError} from 'apollo-link-error';
 
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
+Object.setPrototypeOf =
+  Object.setPrototypeOf ||
+  function(obj, proto) {
+    obj.__proto__ = proto;
+    return obj;
+  };
+
 // const uribase = __DEV__ ? 'https://v.anorak.is' : 'https://anorak.host';
-const uribase = 'https://anorak.host';
+// const uribase = 'https://v.anorak.is';
+const uribase = 'http://localhost:5000';
 const uri = endpoint => `${uribase}/${endpoint}`;
 
 const generateClient = token => {

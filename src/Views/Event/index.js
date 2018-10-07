@@ -1,115 +1,137 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
+import {Text, StyleSheet, View, Image} from 'react-native';
 
-import {Screen, Button} from '../../Components';
+import Hyperlink from 'react-native-hyperlink';
+
+import {momentFormatter} from '../../Helpers/formatters';
+
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+import {Screen, AutoImage, Pinwheel} from '../../Components';
 import {light} from '../../Consts/gradients';
 
-const dummyEvent = {
-  title: 'Árshátíð Framtíðarinnar',
-  image: 'http://ogn.imgix.net/aron.png',
-  location: 'Gullhömrum',
-  date: '14. febrúar',
-  content: [
-    {id: 1, type: 'tagline', content: 'Árshátíð Framtíðarinnar verður haldin hátíðleg 120. skiptið í Gullhömrum í ár!'},
-    {id: 2, type: 'subheading', content: 'Fram koma:'},
-    {id: 3, type: 'text', content: '☞ Hildur\n☛ Joey Christ\n☛ Leoncie\n☛ DJ MuscleBoy.'},
-    {
-      id: 4,
-      type: 'text',
-      content: 'Undirbúið ykkur fyrir veislu aldarinnar með öllu tilheyrandi og mestu bombuviku sem MR hefur upplifað.',
-    },
-    {
-      id: 5,
-      type: 'text',
-      content: 'Náið ykkur í miða áður en þeir seljast upp.',
-    },
-  ],
+const Event = ({data, navigation}) => {
+  if (!data.event)
+    return (
+      <Screen gradient={light} light>
+        <Pinwheel />
+      </Screen>
+    );
+
+  const {event} = data;
+
+  const formattedDate = momentFormatter(event.startTime).format('lll');
+
+  return (
+    <Screen
+      title={event.name}
+      gradient={light}
+      light
+      topPadding
+      onBack={() => navigation.goBack()}
+    >
+      {event.photoUrl && <AutoImage uri={event.photoUrl} />}
+      <View style={styles.content}>
+        <Text style={[styles.title, event.photoUrl && {textAlign: 'left'}]}>
+          {event.name}
+        </Text>
+        <Text style={[styles.eventDate, event.photoUrl && {textAlign: 'left'}]}>
+          {formattedDate}
+        </Text>
+        {event.published === false && (
+          <View
+            style={[
+              styles.unpublished,
+              event.photoUrl && {justifyContent: 'flex-start'}
+            ]}
+          >
+            <View style={styles.unpublishedDot} />
+            <Text style={styles.unpublishedText}>
+              Ekki sýnilegt almennum notendum
+            </Text>
+          </View>
+        )}
+        <Hyperlink linkDefault={true} linkStyle={{color: '#da8846'}}>
+          <Text style={styles.description}>{event.description}</Text>
+        </Hyperlink>
+      </View>
+    </Screen>
+  );
 };
-
-const Tagline = ({content}) => (
-  <View style={styles.baseItem}>
-    <Text style={styles.tagline}>{content}</Text>
-  </View>
-);
-const Subheading = ({content}) => (
-  <View style={styles.baseItem}>
-    <Text style={styles.subheading}>{content}</Text>
-  </View>
-);
-const TextItem = ({content}) => (
-  <View style={styles.baseItem}>
-    <Text style={styles.textItem}>{content}</Text>
-  </View>
-);
-
-const renderItem = item => {
-  switch (item.type) {
-    case 'tagline':
-      return <Tagline key={item.id} content={item.content} />;
-    case 'subheading':
-      return <Subheading key={item.id} content={item.content} />;
-    case 'text':
-      return <TextItem key={item.id} content={item.content} />;
-    default:
-      return null;
-  }
-};
-
-const Event = ({event = dummyEvent}) => (
-  <Screen title="Árshátíð Framtíðarinnar" gradient={light} light>
-    <Image style={styles.image} source={{uri: 'http://ogn.imgix.net/aron.png'}} />
-    <View style={styles.root}>
-      <Text style={styles.title}>{event.title}</Text>
-      <Text style={styles.date}>
-        {event.date} – {event.location}
-      </Text>
-      <View style={styles.content}>{event.content.map(renderItem)}</View>
-      <Button onPress={() => {}} title="Kaupa miða" />
-    </View>
-  </Screen>
-);
 
 const styles = StyleSheet.create({
-  root: {
-    padding: 20,
-  },
-  image: {
-    aspectRatio: 1,
-    alignSelf: 'stretch',
-  },
   title: {
     fontSize: 25,
     fontWeight: '600',
+    textAlign: 'center'
   },
-  date: {
-    fontSize: 20,
-    color: 'rgb(117, 117, 117)',
-    marginBottom: 30,
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 20
   },
-  textItem: {
-    fontSize: 16,
-    lineHeight: 22,
-    marginBottom: 20,
-  },
-  baseItem: {},
-  tagline: {
-    fontSize: 18,
-    color: 'rgb(56, 56, 56)',
-    fontWeight: '600',
-    lineHeight: 25,
-    marginBottom: 20,
-  },
-  subheading: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: 'rgb(144, 144, 144)',
-    marginBottom: 5,
+  description: {
+    fontSize: 15,
+    lineHeight: 24,
+    marginBottom: 50
   },
   content: {
-    marginBottom: 30,
+    padding: 20
   },
+  schoolInfo: {
+    marginTop: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 22
+  },
+  schoolText: {
+    marginLeft: 10
+  },
+  organizationName: {
+    fontWeight: '600'
+  },
+  eventDate: {
+    color: 'rgb(166, 166, 166)',
+    textAlign: 'center'
+  },
+  unpublished: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10
+  },
+  unpublishedText: {
+    color: 'rgb(245, 87, 53)'
+  },
+  unpublishedDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 2.5,
+    backgroundColor: 'rgb(245, 87, 53)',
+    marginRight: 5
+  }
 });
-export default Event;
 
-const desc =
-  'Árshátíð Framtíðarinnar verður haldin hátíðleg 120. skiptið í Gullhömrum í ár!\n\nFram koma:\n☞ Hildur\n☛ Joey Christ\n☛ Leoncie\n☛ DJ MuscleBoy.\n\nNáið ykkur í miða áður en þeir seljast upp!';
+const EventQuery = gql`
+  query eventQuery($id: UUID!) {
+    event(id: $id) {
+      id
+      name
+      description
+      addedOn
+      photoUrl
+      published
+      startTime
+    }
+  }
+`;
+
+export default graphql(EventQuery, {
+  options: ({navigation}) => ({
+    variables: {
+      id: navigation.state.params.id
+    }
+  })
+})(Event);

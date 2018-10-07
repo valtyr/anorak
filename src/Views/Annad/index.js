@@ -32,15 +32,27 @@ const Annad = ({data, navigation}) => (
       <Item
         icon={<MaterialCommunityIcons {...iconProps} name="account-edit" />}
         title="Mínar upplýsingar"
-        onPress={() => navigation.navigate('Profile', {id: data.currentUser && data.currentUser.id})}
+        onPress={() =>
+          navigation.navigate('Profile', {
+            id: data.currentUser && data.currentUser.id
+          })
+        }
       />
       {/* <Item
         icon={<Entypo {...iconProps} name="credit-card" />}
         title="Skírteinið mitt"
         onPress={() => navigation.navigate('Skirteini')}
       /> */}
-      <Item icon={<Ionicons {...iconProps} name="md-pricetag" />} title="Afslættir" />
-      <Item icon={<MaterialCommunityIcons {...iconProps} name="exit-to-app" />} title="Skrá út" onPress={logOut} />
+      <Item
+        icon={<Ionicons {...iconProps} name="md-pricetag" />}
+        title="Afslættir"
+        onPress={() => navigation.navigate('Tilbod')}
+      />
+      <Item
+        icon={<MaterialCommunityIcons {...iconProps} name="exit-to-app" />}
+        title="Skrá út"
+        onPress={logOut}
+      />
     </View>
   </Screen>
 );
@@ -48,14 +60,14 @@ const Annad = ({data, navigation}) => (
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   profile: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   items: {
-    padding: 20,
-  },
+    padding: 20
+  }
 });
 
 const AnnadQuery = gql`

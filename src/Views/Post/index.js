@@ -22,8 +22,13 @@ const Post = ({data, navigation}) => {
   const formattedDate = momentFormatter(post.addedOn).calendar();
 
   return (
-    <Screen title={post.name} gradient={light} light>
-      <NavBar onBack={() => navigation.goBack()} />
+    <Screen
+      title={post.name}
+      gradient={light}
+      light
+      onBack={() => navigation.goBack()}
+      topPadding
+    >
       {post.photoUrl && <AutoImage uri={post.photoUrl} />}
       <View style={styles.content}>
         <Text style={[styles.title, post.photoUrl && {textAlign: 'left'}]}>
@@ -46,7 +51,7 @@ const Post = ({data, navigation}) => {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://neminn.is/wp-content/uploads/2017/01/nfmh2.jpg'
+              uri: `https://ogn.imgix.net/schoolicons/${post.school.code}.png`
             }}
           />
           <View style={styles.schoolText}>

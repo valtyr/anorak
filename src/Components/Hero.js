@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
     height: 1120
   },
   hero: {
+    position: 'relative',
     backgroundColor: 'transparent',
     overflow: 'hidden',
-    marginTop: -900,
-    marginBottom: -120
+    top: -900,
+    marginBottom: -1020
   },
   noVerticalFill: {
-    height: 1032
+    height: 1048
   }
 });
 export default Hero;

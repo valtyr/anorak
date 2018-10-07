@@ -19,9 +19,17 @@ const Yfirlit = ({data, navigation}) => (
         data.currentUser.timetable &&
         data.currentUser.timetable.nextPeriod
       }
+      url={
+        data.currentUser &&
+        data.currentUser.school &&
+        data.currentUser.school.bannerUrl
+      }
       onPeriodPress={() => navigation.navigate('Stundaskrá')}
     />
-    <Events onPress={() => navigation.navigate('Event')} />
+    <Events
+      events={edgeToNode(data.events)}
+      onPress={id => navigation.navigate('Event', {id})}
+    />
     <Birthdays
       birthdays={edgeToNode(data.birthdays)}
       onPress={id => navigation.navigate('Profile', {id})}
@@ -73,6 +81,10 @@ const YfirlitQuery = gql`
           startTime
           weekday
         }
+      }
+      school {
+        id
+        bannerUrl
       }
     }
     birthdays {
