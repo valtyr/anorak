@@ -21,7 +21,6 @@ const PaginatedQuery = props => {
         after: queryResult.pageInfo.endCursor
       },
       updateQuery: (previousResult, {fetchMoreResult}) => {
-        console.log(fetchMoreResult);
         const newEdges = fetchMoreResult[queryToPaginate].edges;
         const pageInfo = fetchMoreResult[queryToPaginate].pageInfo;
         return newEdges.length

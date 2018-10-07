@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: 'absolute',
     top: Platform.select({
-      android: 5,
+      android: 30,
       ios: 0
     }),
     justifyContent: 'center',

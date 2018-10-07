@@ -61,7 +61,6 @@ const ResultList = ({data, onTap, debouncing, search, loadMore, loading}) => {
             }
             onEndReachedThreshold={0.2}
             onEndReached={({distanceFromEnd}) => {
-              console.log('on end reached ', distanceFromEnd);
               if (loadMore) loadMore();
             }}
             style={style.results}
