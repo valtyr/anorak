@@ -38,7 +38,7 @@ class LoggedIn extends Component {
 
   onNotification = notification => {
     console.log(notification);
-    switch (notification.data.type) {
+    switch (notification.data && notification.data.type) {
       case 'login_request':
         return Alert.alert(
           'Innskráningarbeiðni',
@@ -56,7 +56,8 @@ class LoggedIn extends Component {
           ]
         );
       default:
-        return Alert.alert('Tilkynning', '', [{text: 'Loka'}]);
+        return;
+      // return Alert.alert('Tilkynning', notification., [{text: 'Loka'}]);
     }
   };
 
