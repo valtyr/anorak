@@ -9,37 +9,45 @@ import {edgeToNode} from '../../Helpers/graphql';
 import {Screen, Hero, TitleBar} from '../../Components';
 import {Birthdays, Events, HeroImage, Posts} from './components';
 
-const Yfirlit = ({data, navigation}) => (
-  <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
-    <Hero />
-    <TitleBar title="Yfirlit" white />
-    <HeroImage
-      nextPeriod={
-        data.currentUser &&
-        data.currentUser.timetable &&
-        data.currentUser.timetable.nextPeriod
-      }
-      url={
-        data.currentUser &&
-        data.currentUser.school &&
-        data.currentUser.school.bannerUrl
-      }
-      onPeriodPress={() => navigation.navigate('Stundaskrá')}
-    />
-    <Events
-      events={edgeToNode(data.events)}
-      onPress={id => navigation.navigate('Event', {id})}
-    />
-    <Birthdays
-      birthdays={edgeToNode(data.birthdays)}
-      onPress={id => navigation.navigate('Profile', {id})}
-    />
-    <Posts
-      posts={edgeToNode(data.posts)}
-      onPress={id => navigation.navigate('Post', {id})}
-    />
-  </Screen>
-);
+import {logOut} from '../../Helpers/session';
+
+const Yfirlit = ({data, navigation}) => {
+  if (data.currentUser && data.currentUser.accessEnabled === false) {
+    logOut();
+  }
+
+  return (
+    <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
+      <Hero />
+      <TitleBar title="Yfirlit" white />
+      <HeroImage
+        nextPeriod={
+          data.currentUser &&
+          data.currentUser.timetable &&
+          data.currentUser.timetable.nextPeriod
+        }
+        url={
+          data.currentUser &&
+          data.currentUser.school &&
+          data.currentUser.school.bannerUrl
+        }
+        onPeriodPress={() => navigation.navigate('Stundaskrá')}
+      />
+      <Events
+        events={edgeToNode(data.events)}
+        onPress={id => navigation.navigate('Event', {id})}
+      />
+      <Birthdays
+        birthdays={edgeToNode(data.birthdays)}
+        onPress={id => navigation.navigate('Profile', {id})}
+      />
+      <Posts
+        posts={edgeToNode(data.posts)}
+        onPress={id => navigation.navigate('Post', {id})}
+      />
+    </Screen>
+  );
+};
 
 const YfirlitQuery = gql`
   query YfirlitQuery {
@@ -73,6 +81,7 @@ const YfirlitQuery = gql`
     }
     currentUser {
       id
+      accessEnabled
       timetable {
         id
         nextPeriod {
