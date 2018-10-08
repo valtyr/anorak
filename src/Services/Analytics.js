@@ -10,27 +10,47 @@ const MIXPANEL_TOKEN = '33c4583843e8b109469180d847d81e57';
 
 class Analytics {
   init = () => {
-    this.mixpanel = new ExpoMixpanelAnalytics(MIXPANEL_TOKEN);
+    try {
+      this.mixpanel = new ExpoMixpanelAnalytics(MIXPANEL_TOKEN);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   identify = id => {
-    if (!this.mixpanel) return;
-    this.mixpanel.identify(id);
+    try {
+      if (!this.mixpanel) return;
+      this.mixpanel.identify(id);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   track = (event, data) => {
-    if (!this.mixpanel) return;
-    this.mixpanel.track(event, data);
+    try {
+      if (!this.mixpanel) return;
+      this.mixpanel.track(event, data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   pageHit = pageName => {
-    if (!this.mixpanel) return;
-    this.mixpanel.track('Page View', pageName);
+    try {
+      if (!this.mixpanel) return;
+      this.mixpanel.track('Page View', pageName);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   userInfo = info => {
-    if (!this.mixpanel) return;
-    this.mixpanel.people_set(info);
+    try {
+      if (!this.mixpanel) return;
+      this.mixpanel.people_set(info);
+    } catch (e) {
+      console.log(e);
+    }
   };
 }
 
