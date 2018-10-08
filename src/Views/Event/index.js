@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 15,
     lineHeight: 24,
-    marginBottom: 50
+    marginBottom: 50,
+    marginTop: 20
   },
   content: {
     padding: 20
