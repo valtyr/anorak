@@ -9,21 +9,29 @@ const GA_KEY = '';
 const MIXPANEL_TOKEN = '33c4583843e8b109469180d847d81e57';
 
 class Analytics {
-  // constructor() {
-  //   this.googleAnalyticsInstance = new Analytics(GA_KEY, null, {
-  //     debug: DEBUG
-  //   });
-  // }
-
   init = () => {
     this.mixpanel = new ExpoMixpanelAnalytics(MIXPANEL_TOKEN);
   };
 
+  identify = id => {
+    if (!this.mixpanel) return;
+    this.mixpanel.identify(id);
+  };
+
   track = (event, data) => {
+    if (!this.mixpanel) return;
     this.mixpanel.track(event, data);
   };
 
-  pageHit = pageId => {};
+  pageHit = pageName => {
+    if (!this.mixpanel) return;
+    this.mixpanel.track('Page View', pageName);
+  };
+
+  userInfo = info => {
+    if (!this.mixpanel) return;
+    this.mixpanel.people_set(info);
+  };
 }
 
 export default new Analytics();

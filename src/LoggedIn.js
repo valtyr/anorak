@@ -5,13 +5,15 @@ import {graphql, compose} from 'react-apollo';
 import {Notifications} from 'expo';
 
 import {registerForNotifications} from './Helpers/notificationSetup';
-import {ErrorReporting} from './Services';
-import Navigation from './Navigation';
+import {ErrorReporting, Analytics} from './Services';
+import Navigation, {getActiveRouteName} from './Navigation';
 
 class LoggedIn extends Component {
   componentDidMount() {
     const {setToken} = this.props;
     registerForNotifications(setToken);
+
+    Analytics.pageHit('Yfirlit');
 
     this.notificationListener = Notifications.addListener(this.onNotification);
   }
@@ -60,13 +62,35 @@ class LoggedIn extends Component {
 
   componentDidUpdate(oldProps) {
     const {data} = this.props;
-    if (data && data.currentUser)
+    if (data && data.currentUser) {
       ErrorReporting.setUserContext(data.currentUser);
+      Analytics.identify(data.currentUser.id);
+      Analytics.userInfo({
+        ...data.currentUser,
+        phone: `${data.currentUser.phone.countrycode}${
+          data.currentUser.phone.number
+        }`,
+        school: `${data.currentUser.school.name} (${
+          data.currentUser.school.id
+        })`
+      });
+    }
   }
 
   render() {
     const {initializeApp} = this.props;
-    return <Navigation screenProps={{initializeApp}} />;
+    return (
+      <Navigation
+        onNavigationStateChange={(prevState, currentState) => {
+          const currentScreen = getActiveRouteName(currentState);
+          const prevScreen = getActiveRouteName(prevState);
+          if (prevScreen !== currentScreen) {
+            Analytics.pageHit(currentScreen);
+          }
+        }}
+        screenProps={{initializeApp}}
+      />
+    );
   }
 }
 
