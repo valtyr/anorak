@@ -22,7 +22,7 @@ class ProfilePicture extends Component {
             height: width,
             borderRadius: width / 2,
             backgroundColor: 'rgb(224, 224, 224)',
-            overflow: 'hidden',
+            overflow: 'hidden'
             // borderColor: 'rgba(208, 208, 208, 0.5)',
             // borderWidth: 0.5,
           }}
@@ -30,7 +30,10 @@ class ProfilePicture extends Component {
           {hash && (
             <Image
               style={{width: width, height: width}}
-              source={{uri: `https://ogn.imgix.net/${hash}.jpg?w=${width * 2}&h=${width * 2}&fit=facearea&facepad=1.8`}}
+              source={{
+                uri: `https://ogn.imgix.net/profilepictures/${hash}.jpg?w=${width *
+                  2}&h=${width * 2}&fit=facearea&facepad=1.8`
+              }}
             />
           )}
         </View>
@@ -43,7 +46,7 @@ class ProfilePicture extends Component {
             left: x,
             textShadowColor: 'rgba(0, 0, 0, 0.3)',
             textShadowRadius: 4,
-            textShadowOffset: {width: -1, height: 1},
+            textShadowOffset: {width: -1, height: 1}
           }}
         >
           {status}
