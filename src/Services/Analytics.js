@@ -26,19 +26,10 @@ class Analytics {
     }
   };
 
-  track = (event, data) => {
+  track = (event, data = {}) => {
     try {
       if (!this.mixpanel) return;
       this.mixpanel.track(event, data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  pageHit = pageName => {
-    try {
-      if (!this.mixpanel) return;
-      this.mixpanel.track('Page View', pageName);
     } catch (e) {
       console.log(e);
     }

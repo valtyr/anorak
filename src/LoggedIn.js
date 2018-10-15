@@ -5,21 +5,31 @@ import {graphql, compose} from 'react-apollo';
 import {Notifications} from 'expo';
 
 import {registerForNotifications} from './Helpers/notificationSetup';
-import {ErrorReporting, Analytics} from './Services';
-import Navigation, {getActiveRouteName} from './Navigation';
+import {ErrorReporting, Analytics, AppState} from './Services';
+import Navigation from './Navigation';
 
 class LoggedIn extends Component {
   componentDidMount() {
     const {setToken} = this.props;
     registerForNotifications(setToken);
 
-    Analytics.pageHit('Yfirlit');
-
     this.notificationListener = Notifications.addListener(this.onNotification);
+
+    this.appStateListener = AppState.subscribeToActiveAfterWhile(
+      this.trackUsage
+    );
   }
+
+  identify = async () => {
+    await Analytics.track('App opened');
+    await this.trackUsage();
+  };
+
+  trackUsage = async () => Analytics.track('App opened');
 
   componentWillUnmount() {
     this.notificationListener.remove();
+    this.appStateListener.remove();
   }
 
   acceptLoginRequest = id => {
@@ -66,6 +76,7 @@ class LoggedIn extends Component {
     if (data && data.currentUser) {
       ErrorReporting.setUserContext(data.currentUser);
       Analytics.identify(data.currentUser.id);
+      this.trackUsage();
       Analytics.userInfo({
         ...data.currentUser,
         phone: `${data.currentUser.phone.countrycode}${
@@ -80,18 +91,7 @@ class LoggedIn extends Component {
 
   render() {
     const {initializeApp} = this.props;
-    return (
-      <Navigation
-        onNavigationStateChange={(prevState, currentState) => {
-          const currentScreen = getActiveRouteName(currentState);
-          const prevScreen = getActiveRouteName(prevState);
-          if (prevScreen !== currentScreen) {
-            Analytics.pageHit(currentScreen);
-          }
-        }}
-        screenProps={{initializeApp}}
-      />
-    );
+    return <Navigation screenProps={{initializeApp}} />;
   }
 }
 
