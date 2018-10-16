@@ -22,7 +22,7 @@ const Result = ({user, onTap}) => {
       <ProfilePicture width={50} hash={user.imageHash} />
       <View style={style.info}>
         <Text style={style.name}>{user.name}</Text>
-        <Text style={style.group}>{user.group}</Text>
+        {user.group && <Text style={style.group}>{user.group}</Text>}
       </View>
     </TouchableOpacity>
   );
