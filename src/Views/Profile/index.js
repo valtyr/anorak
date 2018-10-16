@@ -66,11 +66,15 @@ class Profile extends Component {
               onPress={() => Linking.openURL(phoneUrl())}
               chevron
             />
-            <ProfileItem
-              title="Heimilsfang"
-              content={`${user.address},\n${user.postcode} ${user.city}`}
-              icon="address"
-            />
+            {user.address &&
+              user.postcode &&
+              user.city && (
+                <ProfileItem
+                  title="Heimilsfang"
+                  content={`${user.address},\n${user.postcode} ${user.city}`}
+                  icon="address"
+                />
+              )}
             {user.snapchatUsername && (
               <ProfileItem
                 title="Snapchat"
