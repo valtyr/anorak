@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, View, Image} from 'react-native';
 
+import Hyperlink from 'react-native-hyperlink';
 import {momentFormatter} from '../../Helpers/formatters';
 
 import {graphql} from 'react-apollo';
@@ -61,7 +62,9 @@ const Post = ({data, navigation}) => {
             <Text style={styles.postDate}>{formattedDate}</Text>
           </View>
         </View>
-        <Text style={styles.body}>{post.body}</Text>
+        <Hyperlink linkDefault={true} linkStyle={{color: '#da8846'}}>
+          <Text style={styles.body}>{post.body}</Text>
+        </Hyperlink>
       </View>
     </Screen>
   );
