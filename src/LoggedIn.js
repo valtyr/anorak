@@ -28,8 +28,8 @@ class LoggedIn extends Component {
   trackUsage = async () => Analytics.track('App opened');
 
   componentWillUnmount() {
-    this.notificationListener.remove();
-    this.appStateListener.remove();
+    if (this.notificationListener) this.notificationListener.remove();
+    if (this.appStateListener) this.appStateListener.remove();
   }
 
   acceptLoginRequest = id => {
