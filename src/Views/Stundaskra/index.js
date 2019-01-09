@@ -4,38 +4,36 @@ import gql from 'graphql-tag';
 import {graphql, compose} from 'react-apollo';
 
 import {Period, FetchTimetable} from './components';
-import {Screen, TitleBar, Hero} from '../../Components';
+import {Screen, TitleBar, Hero, Button} from '../../Components';
 
-import {light} from '../../Consts/gradients';
+// const getNextPeriodIndex = periods => {
+//   const now = new Date();
+//   for (const index in periods) {
+//     const period = periods[index];
+//     const periodEndSplit = period.endTime.split(':');
+//     const periodEndHour = Number(periodEndSplit[0]);
+//     const periodEndMinutes = Number(periodEndSplit[1]);
+//     if (
+//       period.weekday > now.getDay() - 1 ||
+//       (period.weekday === now.getDay() - 1 &&
+//         periodEndHour >= now.getHours() &&
+//         periodEndMinutes >= now.getMinutes())
+//     ) {
+//       return Number(index);
+//     }
+//   }
+//   return 0;
+// };
 
-const getNextPeriodIndex = periods => {
-  const now = new Date();
-  for (const index in periods) {
-    const period = periods[index];
-    const periodEndSplit = period.endTime.split(':');
-    const periodEndHour = Number(periodEndSplit[0]);
-    const periodEndMinutes = Number(periodEndSplit[1]);
-    if (
-      period.weekday > now.getDay() - 1 ||
-      (period.weekday === now.getDay() - 1 &&
-        periodEndHour >= now.getHours() &&
-        periodEndMinutes >= now.getMinutes())
-    ) {
-      return Number(index);
-    }
-  }
-  return 0;
-};
+// const sortedPeriods = periods => {
+//   if (!periods) return null;
+//   const doublePeriods = periods.concat(periods);
+//   const nextPeriodIndex = getNextPeriodIndex(periods);
+//   console.log(nextPeriodIndex, periods.length, nextPeriodIndex);
+//   return doublePeriods.slice(nextPeriodIndex, periods.length + nextPeriodIndex);
+// };
 
-const sortedPeriods = periods => {
-  if (!periods) return null;
-  const doublePeriods = periods.concat(periods);
-  const nextPeriodIndex = getNextPeriodIndex(periods);
-  console.log(nextPeriodIndex, periods.length, nextPeriodIndex);
-  return doublePeriods.slice(nextPeriodIndex, periods.length + nextPeriodIndex);
-};
-
-const Stundaskra = ({data, fetchTimetable}) => {
+const Stundaskra = ({data, fetchTimetable, removeTimetable}) => {
   // const periods =
   //   data.currentUser &&
   //   data.currentUser.timetable &&
@@ -48,8 +46,7 @@ const Stundaskra = ({data, fetchTimetable}) => {
 
   if (!periods) return <FetchTimetable fetchTimetable={fetchTimetable} />;
 
-  return (
-    <Screen style={styles.root} title="Stundaskrá">
+  return <Screen style={styles.root} title="Stundaskrá">
       <Hero />
       <TitleBar title="Stundaskrá" white />
       <View style={styles.timetable}>
@@ -62,8 +59,10 @@ const Stundaskra = ({data, fetchTimetable}) => {
           />
         ))}
       </View>
-    </Screen>
-  );
+      <View style={styles.action}>
+        <Button secondary title="Eyða stundaskrá" onPress={removeTimetable} />
+      </View>
+    </Screen>;
 };
 
 const styles = StyleSheet.create({
@@ -75,6 +74,10 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     backgroundColor: 'transparent'
+  },
+  action: {
+    padding: 15,
+    marginBottom: 20,
   }
 });
 
@@ -94,6 +97,14 @@ const FetchTimetableMutation = gql`
           weekday
         }
       }
+    }
+  }
+`;
+
+const RemoveTimetableMutation = gql`
+  mutation removeTimetable {
+    removeTimetable {
+      ok
     }
   }
 `;
@@ -129,6 +140,25 @@ export default compose(
         const data = proxy.readQuery({query: StundaskraQuery});
         data.currentUser.timetable = getTimetable.timetable;
         proxy.writeQuery({query: StundaskraQuery, data});
+      }
+    }
+  }),
+  graphql(RemoveTimetableMutation, {
+    props: ({ mutate, loading, error }) => ({
+      removeTimetable: mutate
+    }),
+    options: {
+      optimisticResponse: {
+        __typename: "Mutation",
+        removeTimetable: {
+          __typename: "RemoveTimetableMutation",
+          ok: true
+        }
+      },
+      update: proxy => {
+        const data = proxy.readQuery({ query: StundaskraQuery });
+        data.currentUser.timetable = null;
+        proxy.writeQuery({ query: StundaskraQuery, data });
       }
     }
   })
