@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import {edgeToNode} from '../../Helpers/graphql';
 
 import {Screen, Hero, TitleBar} from '../../Components';
-import {Birthdays, Events, HeroImage, Posts} from './components';
+import {Birthdays, Events, HeroImage, Posts, Ad} from './components';
 
 import {logOut} from '../../Helpers/session';
 
@@ -15,6 +15,8 @@ const Yfirlit = ({data, navigation}) => {
   if (data.currentUser && data.currentUser.accessEnabled === false) {
     logOut();
   }
+
+  console.log(data.ad);
 
   return (
     <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
@@ -37,6 +39,7 @@ const Yfirlit = ({data, navigation}) => {
         events={edgeToNode(data.events)}
         onPress={id => navigation.navigate('Event', {id})}
       />
+      <Ad ad={data.ad} />
       <Birthdays
         birthdays={edgeToNode(data.birthdays)}
         onPress={id => navigation.navigate('Profile', {id})}
@@ -78,6 +81,11 @@ const YfirlitQuery = gql`
           photoUrl
         }
       }
+    }
+    ad {
+      id
+      image
+      url
     }
     currentUser {
       id
