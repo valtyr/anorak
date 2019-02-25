@@ -33,7 +33,13 @@ class App extends Component {
     ErrorReporting.init();
     Analytics.init();
 
-    const token = await SecureStore.getItemAsync(TOKEN_KEY);
+    let token;
+    try {
+      token = await SecureStore.getItemAsync(TOKEN_KEY);
+    } catch (e) {
+      SecureStore.deleteItemAsync(TOKEN_KEY);
+      ErrorReporting.captureException(e);
+    }
     if (token) this.setState({token: token || null, loggedIn: true});
     this.setState({splashScreen: false});
   };
