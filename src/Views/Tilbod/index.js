@@ -205,7 +205,8 @@ const styles = StyleSheet.create({
   },
   offerPercent: {
     color: 'rgb(152, 152, 152)',
-    fontSize: 15
+    fontSize: 15,
+    fontStyle: 'italic',
   }
 });
 
