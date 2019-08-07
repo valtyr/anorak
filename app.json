@@ -4,7 +4,7 @@
     "description": "The app for anorak.",
     "slug": "anorak-client",
     "privacy": "unlisted",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "34.0.0",
     "version": "1.0.18",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
