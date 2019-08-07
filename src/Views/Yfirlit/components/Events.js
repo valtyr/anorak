@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import {imageVignette} from '../../../Consts/gradients';
 

@@ -8,7 +8,7 @@ import {
   Platform,
   StatusBar
 } from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import {BackButton} from '../Components';
 

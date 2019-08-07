@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
-import {SecureStore} from 'expo';
+import {SecureStore} from 'expo-secure-store';
 
 import {Button, Particles, ProfilePicture} from '../../../Components';
 import {TOKEN_KEY} from '../../../Consts/vars';

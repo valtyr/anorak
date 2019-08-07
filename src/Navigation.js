@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SecureStore} from 'expo';
 
 import {View} from 'react-native';
 

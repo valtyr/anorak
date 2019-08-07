@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import {lightBlue} from '../../../Consts/gradients';
 

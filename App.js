@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {SecureStore, AppLoading} from 'expo';
+import {AppLoading} from 'expo';
+import {SecureStore} from 'expo-secure-store';
 
 import GraphQLProvider from './src/Apollo';
 import {TOKEN_KEY} from './src/Consts/vars';

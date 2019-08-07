@@ -7,7 +7,7 @@ import {
   StatusBar,
   Dimensions
 } from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import Svg, {Polygon, Path} from 'react-native-svg';
 

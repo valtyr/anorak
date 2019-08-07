@@ -9,7 +9,7 @@ import {
   Dimensions,
   SafeAreaView
 } from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import Svg, {Polygon} from 'react-native-svg';
 

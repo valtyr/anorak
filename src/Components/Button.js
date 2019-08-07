@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator
 } from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import {main, lightGray} from '../Consts/gradients';
 

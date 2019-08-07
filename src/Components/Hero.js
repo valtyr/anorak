@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, StatusBar, Dimensions} from 'react-native';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import Cutout from './Cutout';
 import {main} from '../Consts/gradients';

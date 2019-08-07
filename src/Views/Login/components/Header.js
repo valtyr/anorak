@@ -1,5 +1,5 @@
 import React from 'react';
-import {LinearGradient} from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import {Svg, Polygon} from 'react-native-svg';
 import {View, Text, StyleSheet, SafeAreaView, Dimensions, StatusBar} from 'react-native';
 import {TitleBar} from '../../../Components';

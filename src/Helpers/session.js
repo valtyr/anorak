@@ -1,8 +1,9 @@
 import {TOKEN_KEY} from '../Consts/vars';
-import {SecureStore, Util} from 'expo';
+import {Updates} from 'expo';
+import {SecureStore} from 'expo-secure-store';
 
 export const logOut = () => {
-  SecureStore.deleteItemAsync(TOKEN_KEY).finally(Util.reload);
+  SecureStore.deleteItemAsync(TOKEN_KEY).finally(Updates.reload);
 };
 
 export const logIn = (token, initializeApp) => {
