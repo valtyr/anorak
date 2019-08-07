@@ -58,7 +58,7 @@ class CampaignsTabBar extends React.Component {
 
     const layout = this.state.layout;
 
-    if (layout && layout.length !== inputRange.length) return {};
+    if (!layout || (layout && layout.length !== inputRange.length)) return {};
 
     const width = position.interpolate(
       {

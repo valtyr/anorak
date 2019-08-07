@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 
 import {main, lightGray} from '../Consts/gradients';
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   root: {
     padding: 20,
     backgroundColor: 'transparent',
-    borderRadius: 1000,
+    borderRadius: 30,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   secondaryRoot: {
-    padding: 10
+    padding: 10,
+    borderRadius: 15,
   },
   secondaryTitle: {
     color: 'rgb(190, 190, 190)',

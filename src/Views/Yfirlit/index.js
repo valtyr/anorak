@@ -16,8 +16,6 @@ const Yfirlit = ({data, navigation}) => {
     logOut();
   }
 
-  console.log(data.ad);
-
   return (
     <Screen title="Yfirlit" onRefresh={data.refetch} refreshing={data.loading}>
       <Hero />
