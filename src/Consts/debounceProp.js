@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import shallowEqual from 'shallow-equals';
 
 export const withDebouncedProps = ({debounce = 0, propNames = []}) => WrappedComponent =>
-  class WithDebouncedProps extends Component {
+  (class WithDebouncedProps extends Component {
     static displayName = `withDebouncedProps(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
     constructor(props) {
@@ -45,4 +45,4 @@ export const withDebouncedProps = ({debounce = 0, propNames = []}) => WrappedCom
     render() {
       return <WrappedComponent {...this.props} {...this.state} />;
     }
-  };
+  });

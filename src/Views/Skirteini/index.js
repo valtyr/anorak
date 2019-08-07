@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
-import {Camera, BlurView, ScreenOrientation} from 'expo';
+import { ScreenOrientation } from 'expo';
+import { BlurView } from 'expo-blur';
+import { Camera } from 'expo-camera';
 import {Svg, Polygon} from 'react-native-svg';
 
 const LeftSide = ({height}) => {

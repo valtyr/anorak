@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
-import {WebBrowser} from 'expo';
+import * as WebBrowser from 'expo-web-browser';
 import {AutoImage} from '../../../Components';
 
 import {Analytics} from '../../../Services';
