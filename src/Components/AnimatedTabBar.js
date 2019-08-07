@@ -41,7 +41,13 @@ const styles = StyleSheet.create({
 class CampaignsTabBar extends React.Component {
   state = {
     layout: [],
+    showLine: false,
   };
+
+  componentDidMount() {
+    // TODO REMOVE STUPID RACE CONDITION FIX
+    setTimeout(() => this.setState({showLine: true}), 500);
+  }
 
   handleLayout = (event, index) => {
     const layout = this.state.layout;
@@ -83,6 +89,7 @@ class CampaignsTabBar extends React.Component {
 
   render() {
     const {navigationState, getLabel, jumpToIndex, position} = this.props;
+    const {showLine} = this.state;
 
     const inputRange = [-1, ...navigationState.routes.map((x, i) => i)];
 
@@ -110,7 +117,7 @@ class CampaignsTabBar extends React.Component {
               );
             })}
           </View>
-          {this.state.layout[navigationState.index] && (
+          {showLine && this.state.layout[navigationState.index] && (
             <Animated.View style={[styles.line, this.getInterpolatedValues()]} />
           )}
         </View>
